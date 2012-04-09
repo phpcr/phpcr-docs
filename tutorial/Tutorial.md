@@ -5,7 +5,7 @@ This is an introduction into the PHP content repository. You will mostly see cod
 
 ## Installing Jackalope
 
-Just follow the README of the jackalope-jackrabbit repository.
+Just follow the README of the [jackalope-jackrabbit](https://github.com/jackalope/jackalope-jackrabbit/blob/master/README.md) repository.
 
 
 ## Browser to see what is in the repository
@@ -100,14 +100,14 @@ Once you have autoloading set up, bootstrap jackalope-jackrabbit like this:
 
 We will discuss the import feature in more detail later, but to have some data, we just import something here. Create an XML file test.xml like this:
 
-    <data>
+    <data xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0">
         <node title="Test" content="This is some test content" />
-        <sibling>
+        <sibling title="Test" content="This is another test content">
             <child1 title="Child1 title" />
-            <child2 />
-            <otherchild />
-            <yetanother>
-                <child />
+            <child2 title="Child2 title" />
+            <otherchild title="Otherchild title"/>
+            <yetanother title="Yetanother title">
+                <child title="Child title" />
             </yetanother>
         </sibling>
     </data>
@@ -129,6 +129,9 @@ But as this is PHP, you don't have to catch them. As long as your content is as 
 
 
 #### Reading properties
+
+    //get the node from the session
+    $node = $session->getNode('/data/node');
 
     // get the php value of a property (type automatically determined from stored information)
     echo $node->getPropertyValue('title');
@@ -168,6 +171,9 @@ See the API doc for a list of all supported types.
 
 
 #### Traversing the hierarchy
+
+    //get the node from the session
+    $node = $session->getNode('/data/node');
 
     // getting a node by path relative to the node
     $othernode = $node->getNode('../sibling'); // /sibling
@@ -216,7 +222,7 @@ The test document we imported above does not contain the type information we
 need to show this example. Lets create a special one and load it into the repository with Session::importXML:
 
 
-   <sv:node
+    <sv:node
          xmlns:mix="http://www.jcp.org/jcr/mix/1.0"
          xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
          xmlns:xs="http://www.w3.org/2001/XMLSchema"
@@ -303,10 +309,10 @@ Nodes with the same parent can have the same name. They are distinguished by an 
 
     $sql = "SELECT * FROM [nt:unstructured]
         WHERE [nt:unstructured].[title] = 'Test'
-        ORDER BY [nt:unstructured].title";
+        ORDER BY [nt:unstructured].content";
     $query = $queryManager->createQuery($sql, 'JCR-SQL2');
     $query->setLimit(10);
-    $query->setOffset(10);
+    $query->setOffset(0); //Sets the start offset of the result set to offset
     $queryResult = $query->execute();
 
     foreach ($queryResult->getNodes() as $path => $node) {
@@ -360,8 +366,9 @@ The QOM factory has a method to build a QOM query given four parameters, and [pr
 
 The simplest case is to select all `[nt:unstructured]` nodes:
 
-   $source = $qomFactory->selector('[nt:unstructured]');
-   $query = $qomFactory->createQuery($source, null, array(), array());
+    $source = $qomFactory->selector('[nt:unstructured]');
+    $query = $qomFactory->createQuery($source, null, array(), array());
+    $queryResult = $query->execute();
 
 
 #### The Query Builder: a fluent interface for QOM
@@ -369,6 +376,7 @@ The simplest case is to select all `[nt:unstructured]` nodes:
 Sometimes you may prefer to build a query in several steps. For that reason, the phpcr-utils library provides a fluent wrapper for QOM: the QueryBuilder. It works with any PHPCR implementation.
 
 An example of query built with QueryBuilder:
+
 
     use PHPCR\Query\QOM\QueryObjectModelConstantsInterface;
     use PHPCR\Util\QOM\QueryBuilder;
@@ -379,15 +387,21 @@ An example of query built with QueryBuilder:
     $qb->from($qomFactory->selector('nt:unstructured'))
         //some composed constraint
         ->andWhere($qf->comparison($qf->propertyValue('title'),
-            QueryObjectModelConstantsInterface::JCR_OPERATOR_EQUAL_TO,
-            $qf->literal('Test')))
-        //orderings
-        ->orderBy($qf->propertyValue('title'))
+        QueryObjectModelConstantsInterface::JCR_OPERATOR_EQUAL_TO,
+        $qf->literal('Test')))
+        //orderings (descending by default)
+        ->orderBy($qf->propertyValue('content'))
         //set an offset
-        ->setFirstResult(15)
+        ->setFirstResult(0)
         //and the maximum number of node-tuples to retrieve
         ->setMaxResults(25);
     $result = $qb->execute();
+
+    foreach ($result->getNodes() as $node) {
+        echo $node->getName() . " has content: " . $node->getPropertyValue('content') . "\n";
+    }
+    //node has content: This is some test content
+    //sibling has content: This is another test content
 
 
 ### Writing data
@@ -396,8 +410,11 @@ With PHPCR, you never use 'new'. The node works as a factory to create new nodes
 
 Everything you do on the Session, Node and Property objects is only visible locally in this session until you save the session.
 
+    //get the node from the session
+    $node = $session->getNode('/data/node');
+
     // add a new node as child of $node
-    $newnode = $node->addNode('new node', 'nt:unstructured'); // until we have shown node types, just use nt:unstructured as type
+    $newnode = $node->addNode('new_node', 'nt:unstructured'); // until we have shown node types, just use nt:unstructured as type
 
     // set a property on the new node
     $newproperty = $newnode->setProperty('my property', 'my value');
@@ -407,7 +424,7 @@ Everything you do on the Session, Node and Property objects is only visible loca
 
 
     // have a reference
-    $targetnode = $session->getNode('/data/siblings/yetanother');
+    $targetnode = $session->getNode('/data/sibling/yetanother');
 
     // make sure the target node is referenceable.
     $targetnode->addMixin('mix:referenceable');
@@ -452,6 +469,9 @@ feature of PHPCR.
 
 The only method needed is Node::orderBefore
 
+    //get the node from the session
+    $node = $session->getNode('/data/node');
+
     $node->addNode('first');
     $node->addNode('second'); // new nodes are added to the end of the list
     // order is: first, second
@@ -473,9 +493,13 @@ and all versions created. Each version contains the meta data (previous
 versions, next versions and creation date) and provides a snapshot of the node
 at that point, called "frozen node".
 
+    //get the node from the session
+    $node = $session->getNode('/data/node');
+
     $node->setProperty('foo', 'fafa');
     // mark the node as versionable
     $node->addMixin('mix:versionable');
+    $session->save();
 
     // version operations are done through the VersionManager
     $versionManager = $session->getWorkspace()->getVersionManager();
@@ -492,7 +516,7 @@ at that point, called "frozen node".
     $oldversion = $version->getLinearPredecessor();
     // the version objects are just the meta data. call getFrozenNode on them
     // to get a snapshot of the data when the version was created
-    echo $version->getName() . ': ' . $version->getFrozenNode()->getPropertyValue('foo'); // 1.0: bar
+    echo $version->getName() . ': ' . $version->getFrozenNode()->getPropertyValue('foo') . "\n"; // 1.0: bar
     echo $oldversion->getName() . ': ' . $oldversion->getFrozenNode()->getPropertyValue('foo'); // jcr:rootVersion: fafa
 
     // get the full version history
@@ -503,10 +527,11 @@ at that point, called "frozen node".
 
     // restore an old version
     $node->setProperty('foo', 'different');
+    $versionManager->checkout($node->getPath());
     $session->save(); // restoring is only possible if the session is clean
     $current = $versionManager->getBaseVersion($node->getPath());
     $versionManager->restore(true, $current);
-    echo $node->getProperty('foo'); // fafa
+    echo $node->getPropertyValue('foo'); // fafa
 
 
 ### Locking
@@ -517,6 +542,12 @@ In PHPCR, you can lock nodes to prevent concurrency issues. There is two basic t
 * If a lock is not session based, it is identified by a lock token and stays in place until it times out
 
 Note that jackalope currently only implements session based locks.
+
+    //get the node from the session
+    $node = $session->getNode('/data/sibling');
+    //the node has to be lockable
+    $node->addMixin('mix:lockable');
+    $session->save(); //node needs to be clean before locking
 
     // get the lock manager
     $workspace = $session->getWorkspace();
@@ -550,7 +581,7 @@ you can use transactions.
 Note that Jackalope does not support the full transactions.
 
     // get the transaction manager.
-    $workspace = $session->getWorkspace()
+    $workspace = $session->getWorkspace();
     $transactionManager = $workspace->getTransactionManager();
     // start a transaction
     $transactionManager->begin();
@@ -595,18 +626,22 @@ When exporting, you tell explicitly to which format you want to export.
     $session->exportDocumentView(
         '/data/sibling',
         $file,
-        true // skip binary properties to not have large files in the dump
+        true, // skip binary properties to not have large files in the dump
         false // recursivly output the child nodes as well
     );
+
+    fclose($file);
 
     $file = fopen('/tmp/system.xml', 'w+');
     // export the tree at /foo/bar into a system view xml file
     $session->exportSystemView(
-        '/',
+        '/data/sibling',
         $file,
-        false // do not skip binary properties
+        false, // do not skip binary properties
         false
     );
+
+    fclose($file);
 
 Importing detects the format automatically. If the document is a valid JCR
 system view, it is interpreted according to that format, otherwise if it is a
@@ -646,10 +681,10 @@ Write operations in Jackalope will generate journal entries as expected.
 
     // Get the unfiltered event journal and go through its content
     $journal = $observationManager->getEventJournal();
-    $journal->skipTo(strtotime('-1 day'); // Skip all the events prior to yesterday
+    $journal->skipTo(strtotime('-1 day')); // Skip all the events prior to yesterday
     foreach ($journal as $event) {
         // Do something with $event (it's a Jackalope\Observation\Event instance)
-        echo $event->getType() . ' - ' . $event->getPath()
+        echo $event->getType() . ' - ' . $event->getPath();
     }
 
     // Filtering and using the journal as an iterator
