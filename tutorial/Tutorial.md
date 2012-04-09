@@ -10,7 +10,7 @@ Just follow the README of the [jackalope-jackrabbit](https://github.com/jackalop
 
 ## Browser to see what is in the repository
 
-We recommend installing the [PhpcrBrowser](https://github.com/symfony-cmf/phpcrbrowser) so that you can see what data you currently have in your repository.
+We recommend installing the [PhpcrBrowser](https://github.com/symfony-cmf/phpcrbrowser) so that you can see what data you currently have in your repository. TODO: update this to the new browser once we have it working.
 
 
 # In a nutshell
@@ -60,6 +60,9 @@ You will need to make sure your php classes are available. Usually this means ac
 PHPCR and Jackalope follow the PSR-0 standard. If you want your own autoloading, use a PSR-0 compatible autoloader and configure it to find the code folder.
 
 Once you have autoloading set up, bootstrap jackalope-jackrabbit like this:
+
+    <?php
+    require("/path/to/jackalope-jackrabbit/vendor/.composer/autoload.php");
 
     // factory (the *only* implementation specific part)
     $factoryclass = '\Jackalope\RepositoryFactoryJackrabbit';
@@ -114,7 +117,7 @@ We will discuss the import feature in more detail later, but to have some data, 
 
 Now import this into the repository:
 
-    $session->importXML('/', 'test.xml', ImportUUIDBehaviorInterface::IMPORT_UUID_CREATE_NEW);
+    $session->importXML('/', 'test.xml', \PHPCR\ImportUUIDBehaviorInterface::IMPORT_UUID_CREATE_NEW);
     $session->save();
 
 
@@ -152,7 +155,8 @@ But as this is PHP, you don't have to catch them. As long as your content is as 
     fpassthru($stream);
     fclose($stream);
 
-    fpassthru($node->getPropertyValue('binary-prop')); // the above in short if you just want to dump a file that is in a binary propery
+    // the above in short if you just want to dump a file that is in a binary propery:
+    // fpassthru($node->getPropertyValue('binary-prop'));
 
 Note: the backend stores the property types. When getting property values, they are returned
 with that type, unless you use one of the explicit PropertyInterface::getXX methods.
@@ -311,8 +315,8 @@ Nodes with the same parent can have the same name. They are distinguished by an 
         WHERE [nt:unstructured].[title] = 'Test'
         ORDER BY [nt:unstructured].content";
     $query = $queryManager->createQuery($sql, 'JCR-SQL2');
-    $query->setLimit(10);
-    $query->setOffset(0); //Sets the start offset of the result set to offset
+    $query->setLimit(10); // limit number of results to be returned
+    $query->setOffset(1); // set an offset to skip first n results
     $queryResult = $query->execute();
 
     foreach ($queryResult->getNodes() as $path => $node) {
@@ -414,7 +418,7 @@ Everything you do on the Session, Node and Property objects is only visible loca
     $node = $session->getNode('/data/node');
 
     // add a new node as child of $node
-    $newnode = $node->addNode('new_node', 'nt:unstructured'); // until we have shown node types, just use nt:unstructured as type
+    $newnode = $node->addNode('new node', 'nt:unstructured'); // until we have shown node types, just use nt:unstructured as type
 
     // set a property on the new node
     $newproperty = $newnode->setProperty('my property', 'my value');
@@ -449,10 +453,11 @@ Everything you do on the Session, Node and Property objects is only visible loca
     // for this session, everything that was at /sibling/yetanother is now under /sibling/child1/yetanother
     // i.e. /sibling/child1/yetanother/child
     // once the session is saved, the move is persisted and visible in other sessions
+    // alternatively, you can immediatly move the node in the persistent storage
 
-    // immediatly move the node in the persistent storage
+    // rename node child2 to child2_new
     $workspace = $session->getWorkspace();
-    $workspace->move('/data/sibling/yetanother', '/data/sibling/child1/yetanother');
+    $workspace->move('/data/sibling/child2', '/data/sibling/child2_new');
 
     // copy a node and its children (only available on workspace, not inside session)
     $workspace->copy('/data/sibling/yetanother', '/data/sibling/child1/yetanother');
@@ -558,6 +563,7 @@ Note that jackalope currently only implements session based locks.
     var_dump($lockManager->isLocked('/data/sibling')); // should be true
     var_dump($lockManager->isLocked('/data/sibling/child1')); // should be true because we locked deep
 
+    // getting the lock from LockManager is not yet implemented with jackalope-jackrabbit
     $lock = $lockManager->getLock('/data/sibling');
     var_dump($lock->isLockOwningSession()); // true, this is our lock, not somebody else's
     var_dump($lock->getSecondsRemaining()); // PHP_INT_MAX because this lock has no timeout
@@ -566,6 +572,7 @@ Note that jackalope currently only implements session based locks.
     $node = $lock->getNode(); // this gets us the node for /sibling
     $node === $lockManager->getLock('/data/sibling')->getNode(); // getnode always returns the lock owning node
 
+    // now unlock the node again
     $lockManager->unlock('/data/sibling'); // we could also let $session->logout() unlock when using session based lock
     var_dump($lockManager->isLocked('/data/sibling')); // false
     var_dump($lock->isLive()); // false
