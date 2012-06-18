@@ -18,7 +18,7 @@ We recommend installing the [PhpcrBrowser](https://github.com/symfony-cmf/phpcrb
 The shortest self-contained example should output a line with 'value':
 
     <?php
-    require("/path/to/jackalope-jackrabbit/vendor/.composer/autoload.php");
+    require("/path/to/jackalope-jackrabbit/vendor/autoload.php");
 
     $factoryclass = '\Jackalope\RepositoryFactoryJackrabbit';
     $parameters = array('jackalope.jackrabbit_uri' => 'http://localhost:8080/server');
