@@ -140,7 +140,7 @@
                 <li>Versioning</li>
                 <li>Capability discovery</li>
                 <li>XML import and export</li>
-                <li>Locking &amp; Transactions</li>
+                <li>Locking &amp; Transactions (*)</li>
                 <li>Permissions &amp; Access Control (*)</li>
                 <li>Observation</li>
             </ul>
@@ -206,7 +206,7 @@
             <h2>Mixin Node Types</h2>
             <ul>
                 <li>No multiple inheritance for primary type.</li>
-                <li>Mixins bring traits to your nodes.</li>
+                <li>Mixins bring "traits" to your nodes.</li>
                 <li>Mixin node types can be assigned to a node during that node's lifetime</li>
             </ul>
         </div>
@@ -250,7 +250,7 @@
         <div class="slide">
             <h2>Connecting via PHPCR</h2>
             <pre class="brush: php">
-                // start of implementation specific configuration //
+                // start of implementation specific configuration
                 use Jackalope\RepositoryFactoryJackrabbit as Factory;
 
                 $parameters = array(
@@ -259,7 +259,7 @@
                 );
 
                 $repository = Factory::getRepository($parameters);
-                // end of implementation specific configuration //
+                // end of implementation specific configuration
 
                 $creds = new \PHPCR\SimpleCredentials('user','pw');
                 $session = $repository->login($creds, 'default');
@@ -271,20 +271,27 @@
             <pre class="brush: php">
                 $root = $session->getRootNode();
 
-                // Node always added as child of another node
+                // Nodes must be added as child of another node
                 $node = $root->addNode('test', 'nt:unstructured');
-                // new node is immediately available in memory
+
+                // New node is immediately available to this session
                 $node = $session->getNode('/test');
 
-                // Create or update a property
+                // Create/update a property
                 $node->setProperty('prop', 'value');
 
-                // Persist the changes, /test is now available for all sessions
+                // New node is now available for all sessions
+                // Fails if a concurrent session also created '/test'
                 $session->save();
 
-                // Delete a node and all its children
+                // Delete the node and all its children
                 $node->remove();
+
+                // Fails if a concurrent session also changed '/test'
                 $session->save();
+
+                // Pull in any changes done in concurrent sessions
+                $session->refresh();
             </pre>
         </div>
 
@@ -430,32 +437,31 @@
 
             <p style="font-size:1.2em">Test results using Jackalope with the Jackrabbit backend.</p>
             <pre style="font-size:0.8em; margin-top:20px">
-Soitgoes:jackalope-jackrabbit lsmith$ phpunit -c tests/phpunit.xml.dist
-PHPUnit 3.6.5 by Sebastian Bergmann.
+......................................S.........S.....II.....   61 / 1176 (  5%)
+..........S.S................................................  122 / 1176 ( 10%)
+..........SS..............SS.S.......S.......................  183 / 1176 ( 15%)
+.............................................................  244 / 1176 ( 20%)
+.............................................................  305 / 1176 ( 25%)
+.............................................................  366 / 1176 ( 31%)
+.............................................................  427 / 1176 ( 36%)
+.......................S.........SSS..............I.I.I.I....  488 / 1176 ( 41%)
+....................I...............I..I........SI...........  549 / 1176 ( 46%)
+......................................................S......  610 / 1176 ( 51%)
+.I....................S..S...................................  671 / 1176 ( 57%)
+SS...............SSSS..S.....................................  732 / 1176 ( 62%)
+.....................................SSSSS...................  793 / 1176 ( 67%)
+.......S..............I......S..........I....................  854 / 1176 ( 72%)
+.....SS..................S...................................  915 / 1176 ( 77%)
+.............................................................  976 / 1176 ( 82%)
+............................................................. 1037 / 1176 ( 88%)
+.......S........................................SSSS......... 1098 / 1176 ( 93%)
+..SSS........................................................ 1159 / 1176 ( 98%)
+...........SSSSSS
 
-.........................................SSS..............I.I   61 / 1088 (  5%)
-.I.I........................I...............I..I........SI...  122 / 1088 ( 11%)
-.............................................................  183 / 1088 ( 16%)
-.S.......I....................S..S...........................  244 / 1088 ( 22%)
-........SS...............SSSS..S.............................  305 / 1088 ( 28%)
-.......................................SSSSS.................  366 / 1088 ( 33%)
-.......S..............I......S..........I....................  427 / 1088 ( 39%)
-....SS..................S....................................  488 / 1088 ( 44%)
-.............................................................  549 / 1088 ( 50%)
-.............................................................  610 / 1088 ( 56%)
-......S..............................S.......................  671 / 1088 ( 61%)
-...........................................SSSSSS..S.........  732 / 1088 ( 67%)
-S.....II...............S.S...................................  793 / 1088 ( 72%)
-......SSSS.S.......S.........................................  854 / 1088 ( 78%)
-.............................................................  915 / 1088 ( 84%)
-.............................................................  976 / 1088 ( 89%)
-............................................................. 1037 / 1088 ( 95%)
-..............................................S..
-
-Time: 01:06, Memory: 184.50Mb
+Time: 02:41, Memory: 91.25Mb
 
 OK, but incomplete or skipped tests!
-Tests: 1077, Assertions: 5979, Incomplete: 13, Skipped: 43.
+Tests: 1166, Assertions: 6517, Incomplete: 13, Skipped: 49.
             </pre>
         </div>
 
@@ -464,27 +470,30 @@ Tests: 1077, Assertions: 5979, Incomplete: 13, Skipped: 43.
 
             <p style="font-size:1.2em">Test results using Jackalope with the Doctrine DBAL backend.</p>
             <pre style="font-size:0.8em; margin-top:20px">
-Soitgoes:jackalope-doctrine-dbal lsmith$ phpunit -c tests/phpunit.xml.dist
-Updating schema...done.
-PHPUnit 3.6.5 by Sebastian Bergmann.
+...................S.........S.....II...............S.S......   61 / 1157 (  5%)
+....................................................SS.......  122 / 1157 ( 10%)
+.......SS.S.......S..........................................  183 / 1157 ( 15%)
+.............................................................  244 / 1157 ( 21%)
+.............................................................  305 / 1157 ( 26%)
+.............................................................  366 / 1157 ( 31%)
+.............................................................  427 / 1157 ( 36%)
+....S...........S..............I.I.I.I.......................  488 / 1157 ( 42%)
+.I...............I..I........SI.......................S......  549 / 1157 ( 47%)
+...................................S.......I.................  610 / 1157 ( 52%)
+...S..S...................................SS...............SS  671 / 1157 ( 57%)
+SS..S......SS............SSSSSS..............................  732 / 1157 ( 63%)
+...S.............SSSSS.......S.....S............S............  793 / 1157 ( 68%)
+S.I......S..S.......IS........................SS.............  854 / 1157 ( 73%)
+.........................S...................................  915 / 1157 ( 79%)
+.............................................................  976 / 1157 ( 84%)
+............................................................. 1037 / 1157 ( 89%)
+..............................SSS...SSSSS.SSSSSSSSSSSSSSSSSSS 1098 / 1157 ( 94%)
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS..SI
 
-.......................S.S..............I.I.I.I................  63 / 709 (  8%)
-........I...............I..I........SI.......................S. 126 / 709 ( 17%)
-........................................S.......I.............. 189 / 709 ( 26%)
-......S..S...................................SS.........S.....S 252 / 709 ( 35%)
-SSS..S......SS..............................................S.. 315 / 709 ( 44%)
-...........SSSSS.......S..S..S.........SS.......S....S.I......S 378 / 709 ( 53%)
-..S.......IS................SSSSSSSSSSSSSSSSSSS.......S........ 441 / 709 ( 62%)
-...........S................................................... 504 / 709 ( 71%)
-............................................................... 567 / 709 ( 79%)
-.............................................................SS 630 / 709 ( 88%)
-.SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS 693 / 709 ( 97%)
-SSSSSSSSSSSSI
-
-Time: 13 seconds, Memory: 177.25Mb
+Time: 28 seconds, Memory: 76.00Mb
 
 OK, but incomplete or skipped tests!
-Tests: 617, Assertions: 4660, Incomplete: 12, Skipped: 130.
+Tests: 1075, Assertions: 6144, Incomplete: 14, Skipped: 128.
             </pre>
         </div>
 
@@ -525,10 +534,9 @@ Tests: 617, Assertions: 4660, Incomplete: 12, Skipped: 130.
         <div class="slide">
             <h2>Next steps</h2>
             <ul>
-                <li>More performance optimizations in Jackalope</li>
                 <li>Push the Jackalope DoctrineDBAL transport</li>
                 <li>Security and ACL support</li>
-                <li>Observation support</li>
+                <li>Continue feature/performance optimizations</li>
             </ul>
         </div>
 
