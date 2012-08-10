@@ -168,7 +168,7 @@ See the API doc for a list of all supported types.
     foreach ($node->getPropertiesValues() as $name => $value) {
         echo "$name: $value\n";
     }
-    // get the properties of this node with a name starting with 'a'
+    // get the properties of this node with a name starting with 't'
     foreach ($node->getPropertiesValues("t*") as $name => $value) {
         echo "$name: $value\n";
     }
