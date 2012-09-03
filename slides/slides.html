@@ -123,7 +123,6 @@
                     <ul>
                         <li>Jackrabbit (Davex) transport layer</li>
                         <li>Doctrine DBAL transport layer</li>
-                        <li>MongoDB transport layer</li>
                     </ul>
                 </li>
                 <li>Midgard2 PHPCR</li>
@@ -435,65 +434,66 @@
         <div class="slide">
             <h2>Quality</h2>
 
-            <p style="font-size:1.2em">Test results using Jackalope with the Jackrabbit backend.</p>
+            <p style="font-size:1.2em"><a href="http://travis-ci.org/#!/jackalope/jackalope-jackrabbit">Test results</a> using Jackalope with the Jackrabbit backend.</p>
             <pre style="font-size:0.8em; margin-top:20px">
-......................................S.........S.....II.....   61 / 1176 (  5%)
-..........S.S................................................  122 / 1176 ( 10%)
-..........SS..............SS.S.......S.......................  183 / 1176 ( 15%)
-.............................................................  244 / 1176 ( 20%)
-.............................................................  305 / 1176 ( 25%)
-.............................................................  366 / 1176 ( 31%)
-.............................................................  427 / 1176 ( 36%)
-.......................S.........SSS..............I.I.I.I....  488 / 1176 ( 41%)
-....................I...............I..I........SI...........  549 / 1176 ( 46%)
-......................................................S......  610 / 1176 ( 51%)
-.I....................S..S...................................  671 / 1176 ( 57%)
-SS...............SSSS..S.....................................  732 / 1176 ( 62%)
-.....................................SSSSS...................  793 / 1176 ( 67%)
-.......S..............I......S..........I....................  854 / 1176 ( 72%)
-.....SS..................S...................................  915 / 1176 ( 77%)
-.............................................................  976 / 1176 ( 82%)
-............................................................. 1037 / 1176 ( 88%)
-.......S........................................SSSS......... 1098 / 1176 ( 93%)
-..SSS........................................................ 1159 / 1176 ( 98%)
-...........SSSSSS
+......................................S.........S.....II.....   61 / 1202 (  5%)
+..........S.S................................................  122 / 1202 ( 10%)
+..........SS..............SS.S.......S.......................  183 / 1202 ( 15%)
+.............................................................  244 / 1202 ( 20%)
+.............................................................  305 / 1202 ( 25%)
+.............................................................  366 / 1202 ( 30%)
+.............................................................  427 / 1202 ( 35%)
+.......................S.........SSS..............I.I.I.I....  488 / 1202 ( 40%)
+....................I...............I..I........SI...........  549 / 1202 ( 45%)
+......................................................S......  610 / 1202 ( 50%)
+.I.....................S..S..................................  671 / 1202 ( 55%)
+.SS...............SSSS..S....................................  732 / 1202 ( 60%)
+......................................SSSSS..................  793 / 1202 ( 65%)
+........S..............I......S...........I..................  854 / 1202 ( 71%)
+..........SS..................S..............................  915 / 1202 ( 76%)
+.............................................................  976 / 1202 ( 81%)
+............................................................. 1037 / 1202 ( 86%)
+............S........................................SSSS.... 1098 / 1202 ( 91%)
+.......SSS................................................... 1159 / 1202 ( 96%)
+....................SSSSSS................
 
-Time: 02:41, Memory: 91.25Mb
+Time: 03:23, Memory: 93.50Mb
 
 OK, but incomplete or skipped tests!
-Tests: 1166, Assertions: 6517, Incomplete: 13, Skipped: 49.
+Tests: 1192, Assertions: 6631, Incomplete: 13, Skipped: 49.
             </pre>
         </div>
 
         <div class="slide">
             <h2>Quality</h2>
 
-            <p style="font-size:1.2em">Test results using Jackalope with the Doctrine DBAL backend.</p>
+            <p style="font-size:1.2em"><a href="http://travis-ci.org/#!/jackalope/jackalope-doctrine-dbal">Test results</a> using Jackalope with the Doctrine DBAL backend.</p>
             <pre style="font-size:0.8em; margin-top:20px">
-...................S.........S.....II...............S.S......   61 / 1157 (  5%)
-....................................................SS.......  122 / 1157 ( 10%)
-.......SS.S.......S..........................................  183 / 1157 ( 15%)
-.............................................................  244 / 1157 ( 21%)
-.............................................................  305 / 1157 ( 26%)
-.............................................................  366 / 1157 ( 31%)
-.............................................................  427 / 1157 ( 36%)
-....S...........S..............I.I.I.I.......................  488 / 1157 ( 42%)
-.I...............I..I........SI.......................S......  549 / 1157 ( 47%)
-...................................S.......I.................  610 / 1157 ( 52%)
-...S..S...................................SS...............SS  671 / 1157 ( 57%)
-SS..S......SS............SSSSSS..............................  732 / 1157 ( 63%)
-...S.............SSSSS.......S.....S............S............  793 / 1157 ( 68%)
-S.I......S..S.......IS........................SS.............  854 / 1157 ( 73%)
-.........................S...................................  915 / 1157 ( 79%)
-.............................................................  976 / 1157 ( 84%)
-............................................................. 1037 / 1157 ( 89%)
-..............................SSS...SSSSS.SSSSSSSSSSSSSSSSSSS 1098 / 1157 ( 94%)
-SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS..SI
+....................S.........S.....II................S.S....   61 / 1185 (  5%)
+......................................................SS.....  122 / 1185 ( 10%)
+.........SS.S.......S........................................  183 / 1185 ( 15%)
+.............................................................  244 / 1185 ( 20%)
+.............................................................  305 / 1185 ( 25%)
+.............................................................  366 / 1185 ( 30%)
+.............................................................  427 / 1185 ( 36%)
+......S...........S..............I.I.I.I.....................  488 / 1185 ( 41%)
+...I...............I..I........SI............................  549 / 1185 ( 46%)
+.....................................S.......I...............  610 / 1185 ( 51%)
+......S..S...................................SS..............  671 / 1185 ( 56%)
+.SSSS..S......SS............SSSSSS...........................  732 / 1185 ( 61%)
+......S.............SSSSS..........................S.........  793 / 1185 ( 66%)
+...S.I......S...........I............................SS......  854 / 1185 ( 72%)
+................................S............................  915 / 1185 ( 77%)
+.............................................................  976 / 1185 ( 82%)
+............................................................. 1037 / 1185 ( 87%)
+.....................................SSS...SSSSS.SSSSSSSSSSSS 1098 / 1185 ( 92%)
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS 1159 / 1185 ( 97%)
+S.S..SI................S
 
-Time: 28 seconds, Memory: 76.00Mb
+Time: 48 seconds, Memory: 212.50Mb
 
 OK, but incomplete or skipped tests!
-Tests: 1075, Assertions: 6144, Incomplete: 14, Skipped: 128.
+Tests: 1102, Assertions: 6251, Incomplete: 14, Skipped: 128.
             </pre>
         </div>
 
@@ -536,50 +536,68 @@ Tests: 1075, Assertions: 6144, Incomplete: 14, Skipped: 128.
             <ul>
                 <li>Push the Jackalope DoctrineDBAL transport</li>
                 <li>Security and ACL support</li>
-                <li>Continue feature/performance optimizations</li>
+                <li>Jackrabbit Oak support</li>
             </ul>
         </div>
 
         <div class="slide">
             <h2>Many individuals contribute to the effort</h2>
             <br />
-            <table style="font-size: 0.85em">
+
+            <table style="font-size: 0.7em">
                 <tr>
                     <td>
                         <ul>
+                            <li>0x616469 (Adrian Schlegel)</li>
                             <li>adou600 (Adrien Nicolet)</li>
                             <li>beberlei (Benjamin Eberlei)</li>
                             <li>bergie (Henri Bergius)</li>
+                            <li>bmatzner (Bernd Matzner)</li>
                             <li>brki (Brian King)</li>
                             <li>chirimoya (Thomas Schedler)</li>
                             <li>chregu (Christian Stocker)</li>
                             <li>cordoval (Luis Cordova)</li>
+                            <li>craigmarvelley (Craig Marvelley)</li>
+                            <li>cryptocompress (Crypto Compress)</li>
                             <li>damz (Damien Tournoud)</li>
+                            <li>dbojdo (Daniel Bojdo)</li>
                             <li>dbu (David Buchmann)</li>
                             <li>dotZoki (Zoran)</li>
                             <li>ebi (Tobias Ebnöther)</li>
+                            <li>fabian (Fabian Vogler)</li>
+                            <li>flojon (Jonas Flodén)</li>
                             <li>iambrosi (Ismael Ambrosi)</li>
                             <li>jakuza (Jacopo Romei)</li>
                             <li>justinrainbow (Justin Rainbow)</li>
-                            <li>k-fish (Karsten Dambekalns)</li>
+                            <li>k-fish/kdambekalns (Karsten Dambekalns)</li>
                             <li>krizon (Kristian Zondervan)</li>
+                            <li>lapistano (Bastian Feder)</li>
+                            <li>lsmith77 (Lukas K. Smith)</li>
                         </ul>
                     </td>
                     <td>
                         <ul>
-                            <li>lapistano (Bastian Feder)</li>
-                            <li>lsmith77 (Lukas K. Smith)</li>
+                            <li>mdekrijger</li>
                             <li>micheleorselli (Michele Orselli)</li>
                             <li>nacmartin (Nacho Martín)</li>
                             <li>nicam (Pascal Helfenstein)</li>
                             <li>Ocramius (Marco Pivetta)</li>
                             <li>ornicar (Thibault Duplessis)</li>
+                            <li>pajooh (arash)</li>
+                            <li>petesiss (Pete Sisson)</li>
                             <li>piotras</li>
                             <li>pitpit (Damien Pitard)</li>
-                            <li>robertlemke (Robert Lemke)</li>
+                            <li>rande (Thomas)</li>
+                            <li>richardmiller (Richard Miller)</li>
                             <li>rndstr (Roland Schilter)</li>
+                            <li>robertlemke (Robert Lemke)</li>
+                            <li>sebastien-roch (Sébastien Roch)</li>
                             <li>Seldaek (Jordi Boggiano)</li>
+                            <li>simensen (Beau Simensen)</li>
                             <li>sixty-nine (Daniel Barsotti)</li>
+                            <li>sjopet</li>
+                            <li>starkj (Johannes Stark)</li>
+                            <li>stof (Christophe Coevoet)</li>
                             <li>uwej711 (Uwe Jäger)</li>
                             <li>vedranzgela (Vedran Zgela)</li>
                             <li>videlalvaro (Alvaro Videla)</li>
