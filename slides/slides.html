@@ -86,13 +86,13 @@
         </div>
 
         <div class="slide" style="text-align:center">
-            <h2>CMS often organize content as a tree/graph</h2>
-            <h2>Most NoSQL not a good fit, hurray for Graph DBs</h2>
+            <h2>CMS content as a tree/graph</h2>
+            <h2>NoSQL not a good fit, hurray for Graph DBs</h2>
             <h2><img src="content_graph.png" alt="content graph" /></h2>
         </div>
 
         <div class="slide" style="text-align:center">
-            <h2>CMS should be able to store content versions</h2>
+            <h2>CMS should handle versioning</h2>
             <h2><img src="versioning.png" alt="multiple versions" /></h2>
         </div>
 
@@ -102,12 +102,12 @@
         </div>
 
         <div class="slide">
-            <h2 style="text-align:center">Enter PHPCR</h2><br/>
+            <h1 style="text-align:center">Enter PHPCR</h1>
             <p style="font-size:1.2em;">PHPCR provides a <strong>standardized API</strong> that can be used by any PHP content management system to interface with any content repository.</p>
         </div>
 
         <div class="slide">
-            <h2 style="text-align:center">About PHPCR</h2><br/>
+            <h1>About PHPCR</h1>
             <ul>
                 <li>Java Content Repository (JCR) standard adaptation</li>
                 <li>Write applications once, switch storage backends</li>
@@ -117,7 +117,7 @@
         </div>
 
         <div class="slide">
-            <h2>PHPCR implementations</h2>
+            <h1>PHPCR implementations</h1>
             <ul>
                 <li>Jackalope
                     <ul>
@@ -131,7 +131,7 @@
         </div>
 
         <div class="slide">
-            <h2>PHPCR Features</h2>
+            <h1>PHPCR Features</h1>
             <ul>
                 <li>Tree access</li>
                 <li>Access by UUID</li>
@@ -139,12 +139,14 @@
                 <li>Versioning</li>
                 <li>Capability discovery</li>
                 <li>XML import and export</li>
-                <li>Locking &amp; Transactions (*)</li>
-                <li>Permissions &amp; Access Control (*)</li>
-                <li>Observation</li>
+                <li>Locking</li>
+                <li>Transactions *</li>
+                <li>Permissions</li>
+                <li>Access Control *</li>
+                <li>Observation (*)</li>
             </ul>
             <br/>
-            <p>(*) Not yet implemented in Jackalope</p>
+            <p>* Not yet implemented in Jackalope-Jackrabbit</p>
         </div>
 
         <div class="slide">
@@ -152,7 +154,7 @@
         </div>
 
         <div class="slide">
-            <h2>Hierarchical document store</h2>
+            <h1>Hierarchical document store</h1>
             <ul>
                 <li>All content is stored in a tree of nodes</li>
                 <li>Nodes have a name and a type</li>
@@ -162,36 +164,58 @@
         </div>
 
         <div class="slide">
-            <h2>Nodes</h2>
+            <h1>Repository Content</h1>
+
+            <pre class="brush: xml">
+            <jcr:root>
+              <cms>
+                <pages>
+                  <home title="Hello">
+                    <block title="News"
+                      content="Today: PHPCR presentation"/>
+                  </home>
+                  <contact title="Contact"
+                    content="phpcr-users@groups.google.com"/>
+                </pages>
+              </cms>
+            </jcr:root>
+            </pre>
+        </div>
+
+        <div class="slide">
+            <h1>Nodes</h1>
             <ul>
+                <li>A <strong>Node</strong> is a named container located under a <strong>parent</strong> node</li>
                 <li>Think of XML elements</li>
                 <li>Can be created, deleted, modified, copied...</li>
-                <li>Must have a path (same name siblings are allowed by default)</li>
-                <li>Path is constructed by the parents path and their own name<br/>&nbsp;
+                <li>Path is the parent path plus the node name<br/>&nbsp;
                     <ul>
-                        <li>For example: <tt>/my/path/under/water/fish</tt><br/>&nbsp;</li>
-                        <li>Parent path: <tt>/my/path/under/water</tt></li>
-                        <li>Node name: <tt>fish</tt></li>
+                        <li>Path: <tt>/cms/pages/home</tt><br/>&nbsp;</li>
+                        <li>Parent path: <tt>/cms/pages</tt></li>
+                        <li>Node name: <tt>home</tt></li>
                     </ul>
                 </li>
             </ul>
         </div>
 
         <div class="slide">
-            <h2>Properties</h2>
+            <h1>Properties</h1>
             <ul>
                 <li>A <strong>Node</strong> has named <strong>Properties</strong> with values</li>
-                <li>May use namespaces to avoid name collisions
-                    <ul><li>jcr:created, jcr:mimeType, phpcr:class</li></ul>
-                </li>
-                <li>Use one of the following types
+                <li>Think of XML attributes</li>
+                <li>Data types
                     <ul><li>STRING, URI, BOOLEAN, LONG, DOUBLE, DECIMAL, BINARY, DATE, NAME, PATH, WEAKREFERENCE, REFERENCE</li></ul>
+                </li>
+                <li>(WEAK)REFERENCE: Create links to other nodes<br/>&nbsp;</li>
+
+                <li>Node and property names can use namespaces to avoid name collisions
+                    <ul><li>jcr:created, jcr:mimeType, phpcr:class</li></ul>
                 </li>
             </ul>
         </div>
 
         <div class="slide">
-            <h2>Primary Node Types</h2>
+            <h1>Primary Node Types</h1>
             <ul>
                 <li>Defines allowed names and types for properties and child nodes</li>
                 <li>Every node must have a primary node type</li>
@@ -202,7 +226,7 @@
         </div>
 
         <div class="slide">
-            <h2>Mixin Node Types</h2>
+            <h1>Mixin Node Types</h1>
             <ul>
                 <li>No multiple inheritance for primary type.</li>
                 <li>Mixins bring "traits" to your nodes.</li>
@@ -211,7 +235,7 @@
         </div>
 
         <div class="slide">
-            <h2>Mixin Node Type Examples</h2>
+            <h1>Mixin Node Type Examples</h1>
             <ul>
                 <li>mix:referenceable implies availability of property
                     <ul>
@@ -227,7 +251,7 @@
         </div>
 
         <div class="slide">
-            <h2>Workspaces</h2>
+            <h1>Workspaces</h1>
             <ul>
                 <li>Multiple workspaces, each with its own node tree</li>
                 <li>Each workspace is similar to a Unix file system</li>
@@ -237,7 +261,7 @@
         </div>
 
         <div class="slide" style="text-align:center">
-            <h2>PHPCR</h2>
+            <h1>PHPCR</h1>
             <p><img src="phpcr.png" alt="PHPCR class interaction diagramm" />
             <small style="white-space: nowrap; float:right; font-size: 16pt;">Source: phpcr.github.com</small></p>
         </div>
@@ -247,26 +271,26 @@
         </div>
 
         <div class="slide">
-            <h2>Connecting via PHPCR</h2>
+            <h1>Creating a session</h1>
             <pre class="brush: php">
-                // start of implementation specific configuration
-                use Jackalope\RepositoryFactoryJackrabbit as Factory;
+                use PHPCR\SimpleCredentials;
 
+                // start of implementation specific configuration //
+                use Jackalope\RepositoryFactoryJackrabbit as Factory;
                 $parameters = array(
                     'jackalope.jackrabbit_uri'
-                        => 'http://localhost:8080/server'
+                        => 'http://localhost:8080/server',
                 );
-
                 $repository = Factory::getRepository($parameters);
-                // end of implementation specific configuration
+                // end of implementation specific configuration //
 
-                $creds = new \PHPCR\SimpleCredentials('user','pw');
+                $creds = new SimpleCredentials('admin','admin');
                 $session = $repository->login($creds, 'default');
             </pre>
         </div>
 
         <div class="slide">
-            <h2>CRUD operations</h2>
+            <h1>CRUD operations</h1>
             <pre class="brush: php">
                 $root = $session->getRootNode();
 
@@ -280,7 +304,6 @@
                 $node->setProperty('prop', 'value');
 
                 // New node is now available for all sessions
-                // Fails if a concurrent session also created '/test'
                 $session->save();
 
                 // Delete the node and all its children
@@ -288,14 +311,11 @@
 
                 // Fails if a concurrent session also changed '/test'
                 $session->save();
-
-                // Pull in any changes done in concurrent sessions
-                $session->refresh();
             </pre>
         </div>
 
         <div class="slide">
-            <h2>Tree Traversal API</h2>
+            <h1>Tree Traversal API</h1>
             <pre class="brush: php">
                 $node = $session->getNode('/site/content');
 
@@ -316,29 +336,26 @@
         </div>
 
         <div class="slide">
-            <h2>Versioning API</h2>
+            <h1>Versioning API</h1>
             <pre class="brush: php">
                 // make versionable
                 $node = $session->getNode('/site/content/about');
                 $node->addMixin('mix:versionable');
                 $session->save();
-
-                $vm = $session->getWorkspace()->getVersionManager();
-
-                $node->setProperty('title', 'About');
-
                 // create initial version
+                $node->setProperty('title', 'About');
                 $session->save();
 
                 // check-in (create version)
                 // and check-out (prepare for further updates)
                 // persisted immediately without a save() call
+                $vm = $session->getWorkspace()->getVersionManager();
                 $vm->checkpoint($node->getPath());
             </pre>
         </div>
 
         <div class="slide">
-            <h2>Versioning API</h2>
+            <h1>Versioning API</h1>
             <pre class="brush: php">
                 // update node with some changes
                 $node->setProperty('title', 'Ups');
@@ -364,7 +381,7 @@
         </div>
 
         <div class="slide">
-            <h2>Search via SQL2 API</h2>
+            <h1>Search via SQL2 API</h1>
             <pre class="brush: php">
                 $qm = $workspace->getQueryManager();
 
@@ -386,32 +403,36 @@
         </div>
 
         <div class="slide">
-            <h2>Search via QOM API</h2>
+            <h1>Search via QOM API</h1>
             <pre class="brush: php">
                 $qm = $workspace->getQueryManager();
                 $factory = $qm->getQOMFactory();
 
                 // SELECT * FROM nt:file INNER JOIN nt:folder ON ISCHILDNODE(child, parent)
                 $factory->createQuery(
-                    $factory->join(
-                        $factory->selector('nt:file'),
-                        $factory->selector('nt:folder'),
-                        Constants::JCR_JOIN_TYPE_INNER,
-                        $factory->childNodeJoinCondition('child', 'parent')),
-                    null,
-                    array(),
-                    array());
+                  $factory->join(
+                    $factory->selector('nt:file'),
+                    $factory->selector('nt:folder'),
+                    Constants::JCR_JOIN_TYPE_INNER,
+                    $factory->childNodeJoinCondition(
+                        'child', 'parent')),
+                  null,
+                  array(),
+                  array()
+                );
             </pre>
         </div>
 
         <div class="slide">
-            <h2>Search via Fluent Query API</h2>
+            <h1>Search via Fluent Query API</h1>
             <p>(With phpcr-utils)</p>
             <pre class="brush: php">
                 $qm = $workspace->getQueryManager();
                 $factory = $qm->getQOMFactory();
 
-                // SELECT * FROM nt:unstructured WHERE name NOT IS NULL
+                // SELECT * FROM nt:unstructured
+                // WHERE name NOT IS NULL
+                // LIMIT 10 OFFSET 10
                 $qb = new QueryBuilder($factory);
                 $qb->select($factory->selector('nt:unstructured'))
                    ->where($factory->propertyExistence('name'))
@@ -422,7 +443,45 @@
         </div>
 
         <div class="slide">
-            <h2>Quality</h2>
+            <h1>Concurrent write operations</h1>
+
+            <pre class="brush: php">
+                $test = $session->getNode('/test');
+                $test1 = $session1->getNode('/test');
+
+                $test->remove();
+                $test1->setProperty('prop', 'value');
+
+                $session->save();
+
+                // this will fail as the node is gone
+                $session1->save();
+            </pre>
+        </div>
+
+        <div class="slide">
+            <h1>Locking</h1>
+
+            <pre class="brush: php">
+                // prepare
+                $test = $session->getNode('/test');
+                $test->addMixin('mix:lockable');
+                $session->save();
+
+                // use
+                $lm = $session->getWorkspace()->getLockManager();
+                // lock node and children for 5 seconds
+                $lock = $lm->lock('/test', true, true, 5);
+
+                $test1 = $session1->getNode('/test');
+
+                // here you will get an exception that node is locked
+                $test1->setProperty('prop', 'value');
+            </pre>
+        </div>
+
+        <div class="slide">
+            <h1>Quality</h1>
             <p style="font-size:1.2em">A test suite for PHPCR makes sure all implementations interpret the specification the same way.</p>
             <ul>
                 <li>Higher quality of implementations</li>
@@ -432,40 +491,41 @@
         </div>
 
         <div class="slide">
-            <h2>Quality</h2>
+            <h1>Quality</h1>
 
             <p style="font-size:1.2em"><a href="http://travis-ci.org/#!/jackalope/jackalope-jackrabbit">Test results</a> using Jackalope with the Jackrabbit backend.</p>
             <pre style="font-size:0.8em; margin-top:20px">
-......................................S.........S.....II.....   61 / 1202 (  5%)
-..........S.S................................................  122 / 1202 ( 10%)
-..........SS..............SS.S.......S.......................  183 / 1202 ( 15%)
-.............................................................  244 / 1202 ( 20%)
-.............................................................  305 / 1202 ( 25%)
-.............................................................  366 / 1202 ( 30%)
-.............................................................  427 / 1202 ( 35%)
-.......................S.........SSS..............I.I.I.I....  488 / 1202 ( 40%)
-....................I...............I..I........SI...........  549 / 1202 ( 45%)
-......................................................S......  610 / 1202 ( 50%)
-.I.....................S..S..................................  671 / 1202 ( 55%)
-.SS...............SSSS..S....................................  732 / 1202 ( 60%)
-......................................SSSSS..................  793 / 1202 ( 65%)
-........S..............I......S...........I..................  854 / 1202 ( 71%)
-..........SS..................S..............................  915 / 1202 ( 76%)
-.............................................................  976 / 1202 ( 81%)
-............................................................. 1037 / 1202 ( 86%)
-............S........................................SSSS.... 1098 / 1202 ( 91%)
-.......SSS................................................... 1159 / 1202 ( 96%)
-....................SSSSSS................
+......................................S.........S.....II.....   61 / 1222 (  4%)
+...........S.S...............................................  122 / 1222 (  9%)
+...........SS.......SS.S.......S.............................  183 / 1222 ( 14%)
+.............................................................  244 / 1222 ( 19%)
+.............................................................  305 / 1222 ( 24%)
+.............................................................  366 / 1222 ( 29%)
+.............................................................  427 / 1222 ( 34%)
+..............................S.........SSS..............I.I.  488 / 1222 ( 39%)
+I.I.........................I...................I..I........S  549 / 1222 ( 44%)
+I............................................................  610 / 1222 ( 49%)
+.....S.......I.....................S..S......................  671 / 1222 ( 54%)
+.................SS...............SSSS..S....................  732 / 1222 ( 59%)
+.......................................................SSSSS.  793 / 1222 ( 64%)
+..........................S.............I......S...........I.  854 / 1222 ( 69%)
+.............................SS..................S...........  915 / 1222 ( 74%)
+.............................................................  976 / 1222 ( 79%)
+............................................................. 1037 / 1222 ( 84%)
+...............................S............................. 1098 / 1222 ( 89%)
+...........SSSS...........SSS................................ 1159 / 1222 ( 94%)
+........................................SSSSSS............... 1220 / 1222 ( 99%)
+.
 
 Time: 03:23, Memory: 93.50Mb
 
 OK, but incomplete or skipped tests!
-Tests: 1192, Assertions: 6631, Incomplete: 13, Skipped: 49.
+Tests: 1212, Assertions: 6797, Incomplete: 17, Skipped: 49.
             </pre>
         </div>
 
         <div class="slide">
-            <h2>Quality</h2>
+            <h1>Quality</h1>
 
             <p style="font-size:1.2em"><a href="http://travis-ci.org/#!/jackalope/jackalope-doctrine-dbal">Test results</a> using Jackalope with the Doctrine DBAL backend.</p>
             <pre style="font-size:0.8em; margin-top:20px">
@@ -511,7 +571,7 @@ Tests: 1102, Assertions: 6251, Incomplete: 14, Skipped: 128.
         </div>
 
         <div class="slide">
-            <h2>Not all data fits well in PHPCR/JCR</h2>
+            <h1>Not all data fits well in PHPCR/JCR</h1>
             <ul>
                 <li>For example aggregation is better done in an RDBMS</li>
                 <li>Store web store product description in PHPCR/JCR</li>
@@ -520,8 +580,8 @@ Tests: 1102, Assertions: 6251, Incomplete: 14, Skipped: 128.
         </div>
 
         <div class="slide" style="text-align:center">
-            <h2>Door swings both ways, so remember</h2>
-            <h2><img src="square_in_a_circle.png" alt="like fitting a square into a circle" /></h2>
+            <h1>Door swings both ways, so remember</h1>
+            <img src="square_in_a_circle.png" alt="like fitting a square into a circle" />
         </div>
 
         <div class="slide" style="text-align:center">
@@ -532,31 +592,36 @@ Tests: 1102, Assertions: 6251, Incomplete: 14, Skipped: 128.
         </div>
 
         <div class="slide">
-            <h2>PHPCR in real live</h2>
-            <ul>
+            <img src="barometreprix.png" style="position:absolute; right: -150px; top: -130px; width:300px; -moz-transform:rotate(20deg); -webkit-transform:rotate(20deg); -ms-transform:rotate(20deg); -o-transform:rotate(20deg);" />
+            <img src="knowledgebase.png" style="position:absolute; right: -160px; top: 20px; width:300px; -moz-transform:rotate(-15deg); -webkit-transform:rotate(-15deg); -ms-transform:rotate(-15deg); -o-transform:rotate(-15deg);" />
+            <img src="liip_ch_website.png" style="position:absolute; right: -150px; top: 190px; width:300px; -moz-transform:rotate(5deg); -webkit-transform:rotate(5deg); -ms-transform:rotate(5deg); -o-transform:rotate(5deg);" />
+            <img src="joiz.png" style="position:absolute; right: -130px; top: 400px; width:300px; -moz-transform:rotate(-15deg); -webkit-transform:rotate(-15deg); -ms-transform:rotate(-15deg); -o-transform:rotate(-15deg);" />
+            <h1 style="padding-right: 40%">PHPCR in real live</h1>
+            <ul style="padding-right: 40%; z-index: 12">
                 <li><a href="https://github.com/servergrove/KnowledgeBase">ServerGrove KnowledgeBase</a></li>
                 <li>Used as storage layer in the Symfony Content Management Framework
                     <ul>
                         <li><a href="http://www.barometredesprix.ch">Baromètre des prix</a> (Symfony2 CMF for static pages of an otherwise custom web application)</li>
-                        <li>Used in a Saas CRM service by Quiet Storm Solutions</li>
                         <li><a href="http://www.liip.ch">Liip Company Website</a></li>
+                        <li><a href="http://www.joiz.ch">Joiz</a> for static contents mixed with application generated content</li>
+                        <li>Used in a Saas CRM service by Quiet Storm Solutions</li>
                     </ul>
                 </li>
             </ul>
         </div>
 
         <div class="slide">
-            <h2>Next steps</h2>
+            <h1>Next steps</h1>
             <ul>
-                <li>JSR-333 adjustments of PHPCR</li>
-                <li>Performance improvements for Jackalope DoctrineDBAL transport</li>
-                <li>Security and ACL support</li>
+                <li>Release a stable version 1.0 of Jackalope</li>
+                <li>More features for Jackalope DoctrineDBAL transport</li>
                 <li>Jackrabbit Oak support</li>
+                <li>Security and ACL?</li>
             </ul>
         </div>
 
         <div class="slide">
-            <h2>Many individuals contribute to the effort</h2>
+            <h1>Many individuals contribute to the effort</h1>
             <br />
 
             <table style="font-size: 0.7em">
@@ -624,17 +689,17 @@ Tests: 1102, Assertions: 6251, Incomplete: 14, Skipped: 128.
         </div>
 
         <div class="slide" style="text-align:center">
-            <h2>Several companies and organisations are investing into the effort</h2>
-            <h2><img src="phpcr_companies.png" alt="Liip, Ideato, Nemein, IKS" /></h2>
+            <h1>Several companies and organisations are investing into the effort</h1>
+            <img src="phpcr_companies.png" alt="Liip, Ideato, Nemein, IKS" />
         </div>
 
         <div class="slide" style="text-align:center">
-            <h2>Many projects have expressed interest</h2>
-            <h2><img src="phpcr_projects.png" alt="Symfony2 CMF, Midgard, Typo3, Nooku, ezPublish, Drupal" /></h2>
+            <h1>Many projects have expressed interest</h1>
+            <img src="phpcr_projects.png" alt="Symfony2 CMF, Midgard, Typo3, Nooku, ezPublish, Drupal" />
         </div>
 
         <div class="slide">
-            <h2>Github projects</h2>
+            <h1>Github projects</h1>
             <ul>
                 <li><a href="https://github.com/phpcr/phpcr">PHPCR</a></li>
                 <li><a href="https://github.com/phpcr/phpcr-api-tests">PHPCR test suite</a></li>
@@ -645,7 +710,7 @@ Tests: 1102, Assertions: 6251, Incomplete: 14, Skipped: 128.
         </div>
 
         <div class="slide">
-            <h2>Resources</h2>
+            <h1>Resources</h1>
             <ul>
                 <li><a href="irc://freenode/#jackalope">#jackalope IRC</a></li>
                 <li><a href="irc://freenode/#phpcr">#phpcr IRC</a></li>
