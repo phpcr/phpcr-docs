@@ -62,7 +62,7 @@ PHPCR and Jackalope follow the PSR-0 standard. If you want your own autoloading,
 Once you have autoloading set up, bootstrap jackalope-jackrabbit like this:
 
     <?php
-    require("/path/to/jackalope-jackrabbit/vendor/.composer/autoload.php");
+    require("vendor/autoload.php");
 
     // factory (the *only* implementation specific part)
     $factoryclass = '\Jackalope\RepositoryFactoryJackrabbit';
