@@ -293,12 +293,12 @@
                 use PHPCR\SimpleCredentials;
 
                 // start of implementation specific configuration //
-                use Jackalope\RepositoryFactoryJackrabbit as Factory;
                 $parameters = array(
                     'jackalope.jackrabbit_uri'
                         => 'http://localhost:8080/server',
                 );
-                $repository = Factory::getRepository($parameters);
+                $factory = new \Jackalope\RepositoryFactoryJackrabbit();
+                $repository = $factory->getRepository($parameters);
                 // end of implementation specific configuration //
 
                 $creds = new SimpleCredentials('admin','admin');
