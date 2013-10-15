@@ -521,13 +521,16 @@ at that point, called "frozen node".
     $oldversion = $version->getLinearPredecessor();
     // the version objects are just the meta data. call getFrozenNode on them
     // to get a snapshot of the data when the version was created
-    echo $version->getName() . ': ' . $version->getFrozenNode()->getPropertyValue('foo') . "\n"; // 1.0: bar
-    echo $oldversion->getName() . ': ' . $oldversion->getFrozenNode()->getPropertyValue('foo'); // jcr:rootVersion: fafa
+    echo $version->getName() . ': ' . $version->getFrozenNode()->getPropertyValue('foo') . "\n"; // 1.1: bar
+    echo $oldversion->getName() . ': ' . $oldversion->getFrozenNode()->getPropertyValue('foo'); // 1.0: fafa
 
     // get the full version history
     $history = $versionManager->getVersionHistory($node->getPath());
     foreach ($history->getAllFrozenNodes() as $node) {
-        echo $node->getPropertyValue('foo');
+        if ($node->hasProperty('foo')) {
+            // the root version does not have the property
+            echo $node->getPropertyValue('foo') . "\n";
+        }
     }
 
     // restore an old version
@@ -715,7 +718,7 @@ In a nutshell:
 * for your own things, use nt:unstructured and PHPCR will behave like a NoSQL database
 * if you need to store additional properties or children on existing node types like files, note that while a node can have only one primary type, every node can have any mixin types. Define a mixin type declaring your additional properties, register it with PHPCR and addMixin it to the nodes that need it.
 
-You can define your own node types if you want the equivalent of a strictly defined database structure. See [JCR 2.0: 3.7 Node Types](http://www.day.com/specs/jcr/2.0/3_Repository_Model.html#3.7%20Node%20Types) and [JCR 2.0: 19 Node Type Management](http://www.day.com/specs/jcr/2.0/19_Node_Type_Management.html) / [PHPCR Node Type Namespace](http://phpcr.github.com/doc/html/phpcr/nodetype/package-summary.html).
+You can define your own node types if you want the equivalent of a strictly defined database structure. See [JCR 2.0: 3.7 Node Types](http://www.day.com/specs/jcr/2.0/3_Repository_Model.html#3.7%20Node%20Types) and [JCR 2.0: 19 Node Type Management](http://www.day.com/specs/jcr/2.0/19_Node_Type_Management.html) / [PHPCR Node Type Namespace](http://phpcr.github.io/doc/html/index.html).
 
 
 ## Performance considerations
