@@ -370,7 +370,7 @@ The QOM factory has a method to build a QOM query given four parameters, and [pr
 
 The simplest case is to select all `[nt:unstructured]` nodes:
 
-    $source = $qomFactory->selector('[nt:unstructured]');
+    $source = $qomFactory->selector('node', '[nt:unstructured]');
     $query = $qomFactory->createQuery($source, null, array(), array());
     $queryResult = $query->execute();
 
@@ -388,13 +388,13 @@ An example of query built with QueryBuilder:
     $qf = $qomFactory;
     $qb = new QueryBuilder($qomFactory);
     //add the source
-    $qb->from($qomFactory->selector('nt:unstructured'))
+    $qb->from($qomFactory->selector('node', 'nt:unstructured'))
         //some composed constraint
-        ->andWhere($qf->comparison($qf->propertyValue('title'),
+        ->andWhere($qf->comparison($qf->propertyValue('node', 'title'),
         QueryObjectModelConstantsInterface::JCR_OPERATOR_EQUAL_TO,
         $qf->literal('Test')))
         //orderings (descending by default)
-        ->orderBy($qf->propertyValue('content'))
+        ->orderBy($qf->propertyValue('node', 'content'))
         //set an offset
         ->setFirstResult(0)
         //and the maximum number of node-tuples to retrieve
