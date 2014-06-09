@@ -1,0 +1,14 @@
+div.header {.
+     margin: 0;
+     background: #191818;
+     background-image: none;
+     color: #333;
+     text-align: left;
+     padding: 10px 10px 10px 10px;
+     border-bottom: 1px solid #eee;
+ }
+
+div.logo {
+    text-align: left;
+    padding-top: 0px;
+}
