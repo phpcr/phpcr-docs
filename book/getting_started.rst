@@ -1,5 +1,5 @@
-Introduction and Getting Stated
-===============================
+Getting Stated
+==============
 
 This is an introduction into the PHP content repository. You will mostly see code examples. It should work with any PHPCR implementation. We propose using [Jackalope Jackrabbit](https://github.com/jackalope/jackalope-jackrabbit) to get started as it supports all features described here.
 

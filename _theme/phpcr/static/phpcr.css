@@ -12,3 +12,11 @@ div.logo {
     text-align: left;
     padding-top: 0px;
 }
+
+div.header a {
+    color: white;
+}
+
+div.header .logo {
+    float: right;
+}

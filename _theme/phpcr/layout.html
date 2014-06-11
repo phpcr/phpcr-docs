@@ -6,11 +6,12 @@
 {% block header %}
 {%- if logo %}
 <div class="header">
+  <a href="https://phpcr.github.io">&laquo;  Back to PHPCR website</a>
   <div class="logo">
-    <a href="https://phpcr.github.io">
-      <img class="logo" src="{{ pathto('_static/' + logo, 1) }}" alt="Logo"/>
+      <a href="https://phpcr.github.io"><img class="logo" src="{{ pathto('_static/' + logo, 1) }}" alt="Logo"/></a>
     </a>
   </div>
+  <div style="clear: both"></div>
 </div>
 {%- endif %}
 {% endblock %}
