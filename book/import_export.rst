@@ -11,11 +11,12 @@ are two formats:
     of the repository with all type information. However, it is more verbose.
 
 As an analogy, think about an SQL dump file with SQL statements and the dump of
-an SQL table into a csv file. You can restore the data from both, but the SQL
+an SQL table into a ``csv`` file. You can restore the data from both, but the SQL
 dump knows every detail about your field types and so on while the CSV just
 knows the data.
 
-When exporting, you tell explicitly to which format you want to export:
+When exporting, you explictly call a method corresponding to the desired
+format:
 
 .. code-block:: php
 
@@ -60,7 +61,7 @@ valid XML document it is imported as document:
 
 When importing nodes with a uuid, a couple of different behaviors can be used:
 
-* `IMPORT_UUID_CREATE_NEW`: Create new UUIDs for nodes that are imported, so you never get collisions.
-* `IMPORT_UUID_COLLISION_THROW`: Throw an exception if a node with the same UUID already exists.
-* `IMPORT_UUID_COLLISION_REMOVE_EXISTING`: Remove an existing node if an imported node has the same UUID.
-* `IMPORT_UUID_COLLISION_REPLACE_EXISTING`: Replace existing node with the imported node. This can lead to the imported data being put in various places.
+* ``IMPORT_UUID_CREATE_NEW``: Create new UUIDs for nodes that are imported, so you never get collisions.
+* ``IMPORT_UUID_COLLISION_THROW``: Throw an exception if a node with the same UUID already exists.
+* ``IMPORT_UUID_COLLISION_REMOVE_EXISTING``: Remove an existing node if an imported node has the same UUID.
+* ``IMPORT_UUID_COLLISION_REPLACE_EXISTING``: Replace existing node with the imported node. This can lead to the imported data being put in various places.

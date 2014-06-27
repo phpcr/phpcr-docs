@@ -1,11 +1,13 @@
 Node and property references
 ============================
 
-Nodes can be referenced by unique id (if they are mix:referenceable) or by path. getValue returns the referenced node instance.
-Properties can only be referenced by path because they can not have a unique id.
+Nodes can be referenced by unique id (if they are mix:referenceable) or by
+path. getValue returns the referenced node instance.  Properties can only be
+referenced by path because they can not have a unique id.
 
 The test document we imported above does not contain the type information we
-need to show this example. Lets create a special one and load it into the repository with Session::importXML:
+need to show this example. Lets create a special one and load it into the
+repository with ``Session::importXML``:
 
 .. code-block:: xml
 

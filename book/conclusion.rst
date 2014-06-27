@@ -1,7 +1,7 @@
 Conclusion and further reading
 ==============================
 
-We hope this tutorial helps to get you started. If you miss anything, have suggestions or questions, please contact us on jackalope-dev@googlegroups.com or #jackalope on irc.freenode.net
+We hope this guide helps to get you started. If you miss anything, have suggestions or questions, please contact us on jackalope-dev@googlegroups.com or #jackalope on irc.freenode.net
 
 Further reading
 ---------------

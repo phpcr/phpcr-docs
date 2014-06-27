@@ -3,7 +3,7 @@ Getting Stated
 
 This aims to provide a rounded general reference to PHPCR. You will mostly see
 code examples. It should work with any PHPCR implementation. We propose using
-[Jackalope Jackrabbit](https://github.com/jackalope/jackalope-jackrabbit) to
+`Jackalope Jackrabbit <https://github.com/jackalope/jackalope-jackrabbit>`_ to
 get started as it supports all features described here.
 
 Installing Jackalope
@@ -76,7 +76,8 @@ Still with us? Good, lets get in a bit deeper...
 Get some data into the repository
 ---------------------------------
 
-We will discuss the import feature in more detail later, but to have some data, we just import something here. Create an XML file called `test.xml`:
+We will discuss the import feature in more detail later, but to have some
+data, we just import something here. Create an XML file called `test.xml``:
 
 .. code-block:: xml
 
@@ -104,4 +105,4 @@ You may also use the PHPCR Shell to import data:
 
 .. code-block:: bash
 
-   $ phpcrsh -pmyprofile -c "session:import-xml test.xml"
+   phpcrsh -pmyprofile -c "session:import-xml test.xml"

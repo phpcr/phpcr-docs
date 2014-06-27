@@ -3,7 +3,7 @@ Introduction
 
 In the following chapters, we will show how to use the API. But first, you
 need a very brief overview of the core elements of PHPCR. After reading this
-tutorial, you should browse through the API documentation to get an idea what
+guide, you should browse through the API documentation to get an idea what
 operations you can do on each of those elements. See the conclusions for links
 if you want to have more background.
 

@@ -53,29 +53,29 @@ You can access the QueryObjectModelFactory from the session:
     <?php
     $qomFactory = $mySession->getWorkspace()->getQueryManager()->getQOMFactory();
 
-The QOM factory has a method to build a QOM query given four parameters, and [provides methods](http://phpcr.github.com/doc/html/phpcr/query/qom/queryobjectmodelfactoryinterface.html) to build these four parameters:
+The QOM factory has a method to build a QOM query given four parameters, and `provides methods <http://phpcr.github.com/doc/html/phpcr/query/qom/queryobjectmodelfactoryinterface.html>`_ to build these four parameters:
 
 .. code-block:: php
 
     <?php
     $queryObjectModel = $QOMFactory->createQuery(SourceInterface source, ConstraintInterface constraint, array orderings, array columns);
 
-`source` is made out of one or more selectors. Each selector selects a subset of nodes. Queries with more than one selector have joins. A query with two selectors will have a join, a query with three selectors will have two joins, and so on.
+- ``source`` is made out of one or more selectors. Each selector selects a subset of nodes. Queries with more than one selector have joins. A query with two selectors will have a join, a query with three selectors will have two joins, and so on.
 
-`constraint` filters the set of node-tuples to be retrieved. Constraint may be combined in a tree of constraints to perform a more complex filtering. Examples of constraints are:
+``constraint`` filters the set of node-tuples to be retrieved. Constraint may be combined in a tree of constraints to perform a more complex filtering. Examples of constraints are:
 
-* Absolute or relative paths: nodes descendant of a path, nodes children of a path, nodes reachable by a path.
-* Name of the node.
-* Value of a property.
-* Length of a property.
-* Existence of a property.
-* Full text search.
+    - Absolute or relative paths: nodes descendant of a path, nodes children of a path, nodes reachable by a path.
+    - Name of the node.
+    - Value of a property.
+    - Length of a property.
+    - Existence of a property.
+    - Full text search.
 
-`orderings` determine the order in which the filtered node-tuples will appear in the query results. The relative order of two node-tuples is determined by evaluating the specified orderings, in list order, until encountering an ordering for which one node-tuple precedes the other.
+- ``orderings`` determine the order in which the filtered node-tuples will appear in the query results. The relative order of two node-tuples is determined by evaluating the specified orderings, in list order, until encountering an ordering for which one node-tuple precedes the other.
 
-`columns` are the columns to be included in the tabular view of query results. If no columns are specified, the columns available in the tabular view are implementation determined. In Jackalope include, for each selector, a column for each single-valued non-residual property of the selector's node type.
+- ``columns`` are the columns to be included in the tabular view of query results. If no columns are specified, the columns available in the tabular view are implementation determined. In Jackalope include, for each selector, a column for each single-valued non-residual property of the selector's node type.
 
-The simplest case is to select all `[nt:unstructured]` nodes:
+The simplest case is to select all ``[nt:unstructured]`` nodes:
 
 .. code-block:: php
 

@@ -4,9 +4,12 @@ Writing data
 Creating and updating nodes
 ---------------------------
 
-With PHPCR, you never use 'new'. The node works as a factory to create new nodes and properties. This has the nice side effect that you can not add a node where there is no parent.
+With PHPCR, you never use 'new'. The node works as a factory to create new
+nodes and properties. This has the nice side effect that you can not add a
+node where there is no parent.
 
-Everything you do on the Session, Node and Property objects is only visible locally in this session until you save the session.
+Everything you do on the Session, Node and Property objects is only visible
+locally in this session until you save the session.
 
 .. code-block:: php
 

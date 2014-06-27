@@ -1,8 +1,11 @@
 Reading data and traversal
 ==========================
 
-You can wrap any code into try catch blocks. See the `API doc <http://phpcr.github.com/doc/html/index.html>`_ for what exceptions to expect on which calls. With PHPCR being ported from Java, there is a lot of Exceptions defined.
-But as this is PHP, you don't have to catch them. As long as your content is as the code expects, it won't matter.
+You can wrap any code into try catch blocks. See the `API doc
+<http://phpcr.github.com/doc/html/index.html>`_ for what exceptions to expect
+on which calls. With PHPCR being ported from Java, there is a lot of
+Exceptions defined.  But as this is PHP, you don't have to catch them. As long
+as your content is as the code expects, it won't matter.
 
 .. code-block:: php
 
@@ -106,5 +109,4 @@ Traversing the hierarchy
         $breadcrumb[$parent->getPath()] = $parent->getName();
     } while ($parent != $node);
     var_dump($breadcrumb);
-
 

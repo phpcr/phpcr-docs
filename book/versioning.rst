@@ -1,7 +1,8 @@
 Versioning
 ==========
 
-Versioning is used to track changes in nodes with the possibility to get back to older versions.
+Versioning is used to track changes in nodes with the possibility to get back
+to older versions.
 
 A node with the mixin type `mix:versionable` or `mix:simpleVersionable` can be
 versioned. Versioned nodes have a version history, containing the root version
