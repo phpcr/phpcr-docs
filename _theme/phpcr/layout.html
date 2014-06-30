@@ -1,0 +1,17 @@
+{% extends "pyramid/layout.html" %}
+{% block extrahead %}
+    <link rel="stylesheet" href="{{ pathto('_static/phpcr.css', 1) }}" type="text/css" />
+{% endblock %}
+
+{% block header %}
+{%- if logo %}
+<div class="header">
+  <a href="https://phpcr.github.io">&laquo;  Back to PHPCR website</a>
+  <div class="logo">
+      <a href="https://phpcr.github.io"><img class="logo" src="{{ pathto('_static/' + logo, 1) }}" alt="Logo"/></a>
+    </a>
+  </div>
+  <div style="clear: both"></div>
+</div>
+{%- endif %}
+{% endblock %}
