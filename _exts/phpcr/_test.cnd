@@ -1,0 +1,16 @@
+<acmeBlog = "http://example.org/basiccms/ns/1.0">
+
+[acmeBlog:blog] > nt:base, mix:lastModified, mix:created
+- title
++ * (acmeBlog:post)
+
+[acmeBlog:post] > nt:base, mix:lastModified, mix:created
+- title (string) mandatory
+- date (date) mandatory
+- body (string) mandatory
+- tags (string) multiple
++ * (acmeBlog:comment)
+
+[acmeBlog:comment] > nt:base, mix:created
+- author (string) mandatory
+- comment (string) mandatory

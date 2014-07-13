@@ -32,6 +32,7 @@ sys.path.append(os.path.abspath('_exts'))
 
 # why doesn't this work on readthedocs?
 # extensions = ['phpcr.sphinx.cnd']
+extensions = ['phpcr.sphinx.cnd']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
