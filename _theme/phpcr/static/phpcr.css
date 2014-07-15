@@ -20,3 +20,7 @@ div.header a {
 div.header .logo {
     float: right;
 }
+
+div.body h5 {
+    font-weight: bold;
+}

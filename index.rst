@@ -12,6 +12,7 @@ Contents:
    :maxdepth: 2
 
    book/index
+   references/jcr-283
 
 
 
