@@ -6,3 +6,5 @@ PHPCR-Shell
 
     installation
     connecting
+    interacting
+    configuration
