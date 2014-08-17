@@ -4,7 +4,9 @@ Configuration
 Initialization and reloading
 ----------------------------
 
-The configuration files can be initialized and reloaded at any time using:
+The configuration files can be initialized and reloaded at any time using the
+:ref:`phpcr_shell_command_shellconfiginit` and :ref:`phpcr_shell_command_shellconfigreload`
+commands:
 
 .. code-block:: bash
 
@@ -23,6 +25,19 @@ PHPCRSH supports aliases. Aliases are shortcuts for commands.
 
 Aliases are stored in the file ``$HOME/.phpcrsh/aliases.yml``, which is created
 automatically when launching the PHPCR Shell.
+
+You can list the current aliases with the :ref:`phpcr_shell_command_shellaliaslist` command.
+
+For example:
+
+.. code-block:: bash
+
+    PHPCRSH> ls
+    PHPCRSH> pwd
+    PHPCRSH> refresh
+    PHPCRSH> save
+
+Are all examples of aliases.
 
 Below is the distribution version of this file at time of writing:
 

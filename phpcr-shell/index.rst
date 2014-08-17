@@ -8,3 +8,4 @@ PHPCR-Shell
     connecting
     interacting
     configuration
+    reference

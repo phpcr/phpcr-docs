@@ -31,8 +31,9 @@ You can now run PHPCRSH from anywhere:
 Install as an embedded application
 ----------------------------------
 
-If you are using a Symfony2 application and the `DoctrinePHPCRBundle <https://github.com/doctrine/DoctrinePHPCRBundle/>`_
-then you can easily integrate the PHPCR-Shell.
+If you are using a Symfony2 application and a version of `DoctrinePHPCRBundle
+<https://github.com/doctrine/DoctrinePHPCRBundle/>`_ greater than 1.2 then you
+can easily integrate the PHPCR-Shell.
 
 Simply add the shell to your ``composer.json`` file
 

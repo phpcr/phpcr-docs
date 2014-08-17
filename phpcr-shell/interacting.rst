@@ -10,11 +10,14 @@ both navigate the content hierarchy and execute queries.
     commands, for example "ls" instead of "node:list", "rm" instead of "node:remove" etc.
     See the chapter on :ref:`phpcrsh_configuration_aliases` for more information.
 
+This chapter aims to highlight some but not all of the features of the shell. For a full
+list of features use the ``list`` command.
+
 The current path 
 ----------------
 
-You can navigate the content heriarchy using the `shell:path:change` (or `cd` for short). The
-`pwd` command is the alias for `shell:path:show` and displays the current working path:
+You can navigate the content heriarchy using the :ref:`phpcr_shell_command_shellpathchange` (or `cd` for short). The
+`pwd` command is the alias for :ref:`phpcr_shell_command_shellpathshow` and displays the current working path:
 
 .. code-block:: bash
 
@@ -27,7 +30,7 @@ You can navigate the content heriarchy using the `shell:path:change` (or `cd` fo
 Listing node contents
 ---------------------
 
-You can list the contents of a node with the `node:list` command (or `ls`):
+You can list the contents of a node with the :ref:`phpcr_shell_command_nodelist` command (or `ls`):
 
 .. code-block:: bash
 
@@ -135,16 +138,16 @@ Saving and refreshing the session
 ---------------------------------
 
 Changes made to nodes in the session are not persisted immediately (with the exception
-of ``node:copy`` which is a workspace command).
+of :ref:`phpcr_shell_command_nodecopy` which is a workspace command).
 
-To persist changes to the repository you must call ``session:save`` (or ``save``).
+To persist changes to the repository you must call :ref:`phpcr_shell_command_sessionsave` (or ``save``).
 
-You can also refresh (or reset) the session by calling ``session:refresh`` (or ``refresh``).
+You can also refresh (or reset) the session by calling :ref:`phpcr_shell_command_sessionrefresh` (or ``refresh``).
 
 Queries
 -------
 
-PHPCRSH supports the powerfull JCR-SQL2 query language:
+PHPCRSH supports the JCR-SQL2 query language:
 
 .. code-block:: bash
 
