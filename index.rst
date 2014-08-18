@@ -9,11 +9,10 @@ Welcome to PHPCR's documentation!
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    book/index
-
-
+   phpcr-shell/index
 
 Indices and tables
 ==================
