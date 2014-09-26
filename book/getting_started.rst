@@ -49,7 +49,7 @@ The shortest self-contained example should output a line with 'value':
     $repository = $factory->getRepository($parameters);
 
     // create the credentials object to authenticate with the repository
-    $credentials = new \PHPCR\SimpleCredentials('admin','admin');
+    $credentials = new \PHPCR\SimpleCredentials('admin', 'admin');
 
     // login to the repository and retrieve the session
     $session = $repository->login($credentials, 'default');
@@ -77,7 +77,7 @@ Get some data into the repository
 ---------------------------------
 
 We will discuss the import feature in more detail later, but to have some
-data, we just import something here. Create an XML file called `test.xml``:
+data now for the example, we just import something here. Create an XML file called `test.xml``:
 
 .. code-block:: xml
 

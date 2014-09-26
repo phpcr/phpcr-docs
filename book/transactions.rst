@@ -3,7 +3,7 @@ Transactions
 
 The PHPCR API in itself uses some sort of 'transaction' model by only
 persisting changes on session save. If you need transactions over more than one
-save operation or including workspace operations that are dispatched immediatly,
+save operation or including workspace operations that are dispatched immediately,
 you can use transactions.
 
 Note that Jackalope does not support the full transactions:
