@@ -43,7 +43,7 @@ Reading properties
     fpassthru($stream);
     fclose($stream);
 
-    // the above in short if you just want to dump a file that is in a binary propery:
+    // the above in short if you just want to dump a file that is in a binary property:
     // fpassthru($node->getPropertyValue('binary-prop'));
 
 Note: the backend stores the property types. When getting property values, they are returned

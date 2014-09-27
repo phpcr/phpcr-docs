@@ -13,7 +13,7 @@ commands:
     PHPCRSH> shell:config:init
     PHPCRSH> shell:config:reload
 
-At time of writing the only configuration file affected by these commands is
+At the time of writing the only configuration file affected by these commands is
 the ``aliases.yml`` file detailed below.
 
 .. _phpcrsh_configuration_aliases:
@@ -39,7 +39,7 @@ For example:
 
 Are all examples of aliases.
 
-Below is the distribution version of this file at time of writing:
+Below is the distribution version of this file at the time of writing:
 
 .. code-block:: yaml
 

@@ -15,7 +15,7 @@ an SQL table into a ``csv`` file. You can restore the data from both, but the SQ
 dump knows every detail about your field types and so on while the CSV just
 knows the data.
 
-When exporting, you explictly call a method corresponding to the desired
+When exporting, you explicitly call a method corresponding to the desired
 format:
 
 .. code-block:: php

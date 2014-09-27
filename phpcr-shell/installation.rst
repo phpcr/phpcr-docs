@@ -2,7 +2,7 @@ Installation
 ============
 
 You can install PHPCR Shell either as an embedded application or as a PHAR, or
-you can built it your self (for instance if you want the latest version).
+you can build it yourself (when you want the latest version).
 
 .. _phpcrsh-connecting-installation-as-phar:
 
@@ -12,7 +12,7 @@ Install as a PHAR
 The latest release can be downloaded from the `Github releases page
 <https://github.com/doctrine/DoctrinePHPCRBundle/>`_.
 
-After downloading it it is recommended to install it in a path accessible
+After downloading it is recommended to install it in a path accessible
 by the system, for example:
 
 .. code-block:: bash
@@ -43,7 +43,7 @@ Simply add the shell to your ``composer.json`` file
         ...
         require: {
             ...
-            "phpcr-shell": "<lastest version here>"
+            "phpcr-shell": "<latest version here>"
         }
         ...
     }
@@ -57,7 +57,7 @@ And you can connect directly:
 Build it from source
 --------------------
 
-PHPSH uses the box PHAR building tool, install it `here <http://box-project.org>`_.
+PHPCRSH uses the box PHAR building tool, install it `here <http://box-project.org>`_.
 
 Build the PHAR:
 

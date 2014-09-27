@@ -1,13 +1,13 @@
 Interacting
 ===========
 
-The PHPCRSH is designed to be a hybrid of a filesystem and RDBMS shell. You can
+The PHPCRSH is designed to be a hybrid of a filesystem and an RDBMS shell. You can
 both navigate the content hierarchy and execute queries.
 
 .. note::
 
     PHPCRSH supports "aliases". In this chapter we will use aliases rather than the full
-    commands, for example "ls" instead of "node:list", "rm" instead of "node:remove" etc.
+    version of the commands, for example "ls" instead of "node:list", "rm" instead of "node:remove" etc.
     See the chapter on :ref:`phpcrsh_configuration_aliases` for more information.
 
 This chapter aims to highlight some but not all of the features of the shell. For a full
@@ -16,7 +16,7 @@ list of features use the ``list`` command.
 The current path 
 ----------------
 
-You can navigate the content heriarchy using the :ref:`phpcr_shell_command_shellpathchange` (or `cd` for short). The
+You can navigate the content hierarchy using the :ref:`phpcr_shell_command_shellpathchange` (or `cd` for short). The
 `pwd` command is the alias for :ref:`phpcr_shell_command_shellpathshow` and displays the current working path:
 
 .. code-block:: bash
@@ -80,7 +80,7 @@ And a depth:
     | jcr:primaryType                                                          | NAME            | nt:unstructured                   |
     +--------------------------------------------------------------------------+-----------------+-----------------------------------+
 
-In addtion to listing the actual node content, you can also show the
+In addition to listing the actual node content, you can also show the
 node properties and children which are defined in the schema with the ``-t`` option
 (**t** for template). The second of the following two examples illustrates this option:
 
@@ -109,7 +109,7 @@ many.
 Editing nodes
 -------------
 
-You can edit nodes simply using your systems default editor (as defined by the ``$EDITOR`` environment
+You can edit nodes simply by using your system's default editor (as defined by the ``$EDITOR`` environment
 variable).
 
 

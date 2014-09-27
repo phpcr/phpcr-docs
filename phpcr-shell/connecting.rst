@@ -29,7 +29,7 @@ Doctrine-Dbal
 General connections
 """""""""""""""""""
 
-The following is the minimal required to connect to a MySQL database:
+The following is the minimal required parameters to connect to a MySQL database:
 
 .. code-block:: bash
 
@@ -39,7 +39,7 @@ Parameters:
 
 - **db-name**: Name of database to connect to
 - **db-user**: Username for database, default ``root``
-- **db-password**: Password for datanase, default empty
+- **db-password**: Password for database, default empty
 - **db-host**: Host for database, default ``localhost``
 - **db-path**: Path to sqlite database
 
