@@ -76,8 +76,8 @@ Still with us? Good, lets get in a bit deeper...
 Get some data into the repository
 ---------------------------------
 
-We will discuss the import feature in more detail later, but to have some
-data now for the example, we just import something here. Create an XML file called `test.xml``:
+We will now use the PHPCR import feature to import some initial data into
+the repository. First create an XML file called `test.xml``:
 
 .. code-block:: xml
 
@@ -106,3 +106,7 @@ You may also use the PHPCR Shell to import data:
 .. code-block:: bash
 
    phpcrsh -pmyprofile -c "session:import-xml test.xml"
+
+.. note::
+
+    The import feature is explored in the :doc:`import_export` chapter.
