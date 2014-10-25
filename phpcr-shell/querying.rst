@@ -59,35 +59,6 @@ The UPDATE Grammer extends the SELECT grammer:
     PHPCRSH > UPDATE [slinpTest:article] AS a LEFT JOIN [slinpTest:foobar] AS b ON a.uuid = b.content SET a.title="Away", b.title="Home"  WHERE a.title="Home"
     1 row(s) affected in 0.01s
 
-Multivalue indexes
-~~~~~~~~~~~~~~~~~~
-
-You can update (or remove) specific multivalue indexes:
-
-.. code-block:: bash
-
-    PHPCRSH > UPDATE [slinpTest:article] SET title[1] = "Away" WHERE title="Home"
-    1 row(s) affected in 0.01s
-
-The above query will set the multivalue value at index 1 to "Away" when the
-value "Home" matches *one of* the multivalue property values.
-
-.. code-block:: bash
-
-    PHPCRSH > UPDATE [slinpTest:article] SET title[1] = NULL WHERE title="Home"
-    1 row(s) affected in 0.01s
-
-Same as above but the value at index 1 will be removed.
-
-.. code-block:: bash
-
-    PHPCRSH > UPDATE [slinpTest:article] SET title[] = "Barfoo" WHERE title="Home"
-    1 row(s) affected in 0.01s
-
-The above will *add* the value "barfoo" to the multivalue properties (see also :ref:`phpcr_shell_query_function_arrayappend`)
-
-See also: :ref:`phpcr_shell_query_function_arrayremove`, :ref:`phpcr_shell_query_function_arrayreplace`, :ref:`phpcr_shell_query_function_arrayappend`,
-
 Functions
 ~~~~~~~~~
 
@@ -113,25 +84,67 @@ Arguments:
   property
 - **value**: Value to match and remove
 
+.. _phpcr_shell_query_function_array:
+
+array
+"""""
+
+Provides an array value, analagous to the ``array`` keyword in PHP:
+
+.. code-block:: bash
+
+    PHPCRSH> UPDATE [nt:unstructured] SET tags = array('One', 'Two', 'Three')
+
+Arguments:
+
+- List of values
+
 .. _phpcr_shell_query_function_arrayreplace:
 
 array_replace
 """""""""""""
 
-Replace a given multivalue property value.
+Replace a given multivalue property value, or remove it by setting it to
+``NULL``.
 
-Usage:
+Replace a value:
 
 .. code-block:: bash
 
-    PHPCRSH> UPDATE [nt:unstructured] SET tags = array_replace(tags, 'Planes', 'Rockets') WHERE tags = 'Planes'
+    PHPCRSH> UPDATE [nt:unstructured] SET tags = array_replace(tags, 'Planes', 'Rockets')
+
+Remove matching values:
+
+.. code-block:: bash
+
+    PHPCRSH> UPDATE [nt:unstructured] SET tags = array_replace(tags, 'Planes', NULL)
 
 Arguments:
 
 - **propertyName**: Property name (including selector) of the multivalue
   property
-- **value**: Value to replace
+- **value**: Value to replace, use ``NULL`` to remove a value
 - **replacement**: Replacement value
+
+.. _phpcr_shell_query_function_arrayreplaceat:
+
+array_replace_at
+""""""""""""""""
+
+Replace a given multivalue property value at the specified index.
+
+Usage:
+
+.. code-block:: bash
+
+    PHPCRSH> UPDATE [nt:unstructured] SET tags = array_replace_at(tags, 0, 'Rockets') WHERE tags = 'Planes'
+
+Arguments:
+
+- **propertyName**: Property name (including selector) of the multivalue
+  property
+- **index**: Index at which the new value should be set
+- **value**: Value to set
 
 .. _phpcr_shell_query_function_arrayappend:
 
