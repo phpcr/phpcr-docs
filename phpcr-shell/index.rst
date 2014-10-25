@@ -7,5 +7,6 @@ PHPCR-Shell
     installation
     connecting
     interacting
+    querying
     configuration
     reference
