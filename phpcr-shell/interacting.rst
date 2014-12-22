@@ -106,6 +106,18 @@ In the above examples you see first the "current" contents of the node, in the s
 are as yet unrealized. Template items are indicated with the ``@`` symbol. The ``*`` indicates zero or
 many.
 
+Wildcards
+---------
+
+It is possible to use wildcard expansion when listing node contents:
+
+.. code-block:: bash
+
+
+    PHPCRSH> node:list /cms/articles/*/*title
+
+Wildcards also work on some other commands such as ``node:remove``
+
 Editing nodes
 -------------
 

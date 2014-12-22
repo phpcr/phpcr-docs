@@ -1,5 +1,5 @@
-PHPCR-Shell
-===========
+PHPCR-Shell 1.0
+===============
 
 .. toctree::
     :maxdepth: 2
