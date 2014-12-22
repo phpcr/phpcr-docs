@@ -9,4 +9,3 @@ PHPCR-Shell 1.0
     interacting
     querying
     configuration
-    reference

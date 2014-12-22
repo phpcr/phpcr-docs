@@ -11,13 +11,15 @@ both navigate the content hierarchy and execute queries.
     See the chapter on :ref:`phpcrsh_configuration_aliases` for more information.
 
 This chapter aims to highlight some but not all of the features of the shell. For a full
-list of features use the ``list`` command.
+list of commands use the ``list`` command.
+
+For help with a specific command use the ``--help`` option.
 
 The current path 
 ----------------
 
-You can navigate the content hierarchy using the :ref:`phpcr_shell_command_shellpathchange` (or `cd` for short). The
-`pwd` command is the alias for :ref:`phpcr_shell_command_shellpathshow` and displays the current working path:
+You can navigate the content hierarchy using ``shell:path:change`` (or `cd` for short). The
+`pwd` command is the alias for ``shell:path:show`` and displays the current working path:
 
 .. code-block:: bash
 
@@ -30,11 +32,12 @@ You can navigate the content hierarchy using the :ref:`phpcr_shell_command_shell
 Listing node contents
 ---------------------
 
-You can list the contents of a node with the :ref:`phpcr_shell_command_nodelist` command (or `ls`):
+You can list the contents of a node with the ``node:list`` command (or `ls`):
 
 .. code-block:: bash
 
     PHPCRSH > ls
+    /
     +-----------------+-----------------+-----------------+
     | cms/            | nt:unstructured |                 |
     | jcr:primaryType | NAME            | nt:unstructured |
@@ -45,6 +48,7 @@ Which also accepts a target:
 .. code-block:: bash
 
     PHPCRSH > ls cms
+    /cms
     +--------------------+-----------------+-----------------------------------+
     | pages/             | nt:unstructured |                                   |
     | posts/             | nt:unstructured |                                   |
@@ -60,6 +64,7 @@ And a depth:
 .. code-block:: bash
 
     PHPCRSH > ls -L2
+    /
     +--------------------------------------------------------------------------+-----------------+-----------------------------------+
     | cms/                                                                     | nt:unstructured |                                   |
     |   pages/                                                                 | nt:unstructured |                                   |
@@ -87,12 +92,14 @@ node properties and children which are defined in the schema with the ``-t`` opt
 .. code-block:: bash
 
     PHPCRSH> ls
+    /cms/foo
     +--------------------+-------------------------+------------------------------------------------+
     | home               | slinpTest:article       | Home                                           |
     | jcr:primaryType    | NAME                    | slinpTest:article                              |
     | title              | STRING                  | Slinp Web Content Framework                    |
     +--------------------+-------------------------+------------------------------------------------+
     PHPCRSH> ls -T
+    /cms/foo
     +--------------------+-------------------------+------------------------------------------------+
     | home               | slinpTest:article       | Home                                           |
     | @*                 | nt:base                 |                                                |
@@ -150,8 +157,8 @@ Saving and refreshing the session
 ---------------------------------
 
 Changes made to nodes in the session are not persisted immediately (with the exception
-of :ref:`phpcr_shell_command_nodecopy` which is a workspace command).
+of ``node:copy`` which is a workspace command).
 
-To persist changes to the repository you must call :ref:`phpcr_shell_command_sessionsave` (or ``save``).
+To persist changes to the repository you must call ``session:save`` (or ``save``).
 
-You can also refresh (or reset) the session by calling :ref:`phpcr_shell_command_sessionrefresh` (or ``refresh``).
+You can also refresh (or reset) the session by calling ``session:refresh`` (or ``refresh``).
