@@ -37,7 +37,7 @@ You can list the contents of a node with the ``node:list`` command (or `ls`):
 .. code-block:: bash
 
     PHPCRSH > ls
-    /
+    / [nt:unstructured] > nt:base
     +-----------------+-----------------+-----------------+
     | cms/            | nt:unstructured |                 |
     | jcr:primaryType | NAME            | nt:unstructured |
@@ -48,7 +48,7 @@ Which also accepts a target:
 .. code-block:: bash
 
     PHPCRSH > ls cms
-    /cms
+    /cms [nt:unstructured] > nt:base
     +--------------------+-----------------+-----------------------------------+
     | pages/             | nt:unstructured |                                   |
     | posts/             | nt:unstructured |                                   |
@@ -64,7 +64,7 @@ And a depth:
 .. code-block:: bash
 
     PHPCRSH > ls -L2
-    /
+    / [nt:unstructured] > nt:base
     +--------------------------------------------------------------------------+-----------------+-----------------------------------+
     | cms/                                                                     | nt:unstructured |                                   |
     |   pages/                                                                 | nt:unstructured |                                   |
@@ -92,14 +92,14 @@ node properties and children which are defined in the schema with the ``-t`` opt
 .. code-block:: bash
 
     PHPCRSH> ls
-    /cms/foo
+    /cms/foo [nt:unstructured] > nt:base
     +--------------------+-------------------------+------------------------------------------------+
     | home               | slinpTest:article       | Home                                           |
     | jcr:primaryType    | NAME                    | slinpTest:article                              |
     | title              | STRING                  | Slinp Web Content Framework                    |
     +--------------------+-------------------------+------------------------------------------------+
     PHPCRSH> ls -T
-    /cms/foo
+    /cms/foo [nt:unstructured] > nt:base
     +--------------------+-------------------------+------------------------------------------------+
     | home               | slinpTest:article       | Home                                           |
     | @*                 | nt:base                 |                                                |
