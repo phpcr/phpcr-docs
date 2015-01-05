@@ -65,6 +65,10 @@ Functions
 The ``UPDATE`` grammer also allows the use of functions (note that only UPDATE
 supports functions).
 
+Functions correspond to either ``SET`` or ``APPLY`` syntax. The ``APPLY``
+functions take action on the node as a whole. All functions listed below are
+for use with ``SET`` unless stated otherwise.
+
 .. _phpcr_shell_query_function_arrayremove:
 
 array_remove
@@ -164,6 +168,28 @@ Arguments:
 - **propertyName**: Property name (including selector) of the multivalue
   property
 - **value**: Value to append
+
+mixin_add
+"""""""""
+
+This function allows you to add a mixins to nodes. This is an APPLY function.
+
+Usage:
+
+.. code-block:: bash
+
+    PHPCRSH> UPDATE [nt:unstructured] APPLY mixin_add('mix:versionable')
+
+mixin_remove
+""""""""""""
+
+This function allows you to remove mixins from nodes. This is an APPLY function.
+
+Usage:
+
+.. code-block:: bash
+
+    PHPCRSH> UPDATE [nt:unstructured] APPLY mixin_remove('mix:versionable')
 
 Deleting
 --------

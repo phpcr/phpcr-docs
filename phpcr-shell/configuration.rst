@@ -107,3 +107,25 @@ For a full reference enter in the shell:
 .. code-block:: bash
 
     PHPCRSH> shell:alias:list
+
+General Settings
+----------------
+
+There is a general configuration file under ``/.phpcrsh/phpcrsh.yml``.
+
+.. code-block:: bash
+
+    # Amount of decimal expansion when showing timing information
+    execution_time_expansion: 6
+
+    # Show execution time for queries
+    show_execution_time_query: true
+
+    # Show execution time for node list operations (i.e. node:list)
+    show_execution_time_list: true
+
+.. note::
+
+    This file is automatically merged on-top of the distribution
+    configuration. This means that you can delete any or all of the
+    configurations in this file to revert to the default values.
