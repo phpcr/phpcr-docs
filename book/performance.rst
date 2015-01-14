@@ -18,7 +18,7 @@ object instance back without overhead.
 Only request what you need
 --------------------------
 
-emember that you can filter nodes on Node::getNodes if you only need a list of
+Remember that you can filter nodes on Node::getNodes if you only need a list of
 specific nodes or all nodes in some namespace.
 
 The values of binary properties can potentially have a huge size and should
