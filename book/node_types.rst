@@ -1,10 +1,11 @@
 Node Types
 ==========
 
-Node types in PHPCR are analogous to schemas in JCR. Node types enable you to
-define which items (properties or child nodes) a node may or may not have. It
-allows you to apply constraints to these items and to specify if items should
-be automatically created when the node is created.
+Node types in PHPCR are somewhat analogous to table schemas in SQL. Node types
+enable you to define which items (properties or child nodes) a node may or may
+not have and what types they should be. They also allow you to apply
+constraints to these items and to specify if items should be automatically
+created when the node is created.
 
 Node types can be defined as classes or as CND files. CND is an abbreviation
 for Compact Namespace and Node Type Definition, and is part of the JCR-283
