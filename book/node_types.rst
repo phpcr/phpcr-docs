@@ -1,7 +1,7 @@
 Node Types
 ==========
 
-Node types in PHPCR are anagagous to schemas in JCR. Node types enable you to
+Node types in PHPCR are analogous to schemas in JCR. Node types enable you to
 define which items (properties or child nodes) a node may or may not have. It
 allows you to apply constraints to these items and to specify if items should
 be automatically created when the node is created.
