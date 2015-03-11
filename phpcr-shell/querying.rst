@@ -46,6 +46,13 @@ and are specific to PHPCRSH.
     any updates before hand in a development environment and ensure that you
     have a backup. We can take no responsibility for lost data!
 
+
+.. note::
+
+    UPDATE and DELETE operations are performed in userland and are based upon
+    underlying SELECT operations, so any overhead incurred in an equivalent
+    SELECT will be the baseline for UPDATE or DELETE overheads.
+    
 Updating
 --------
 
@@ -169,6 +176,40 @@ Arguments:
   property
 - **value**: Value to append
 
+expr
+""""
+
+Evaluate an expression. This function is very powerful in that it enables
+you to use the `Symfony Expression Language`_ to evaluate an expression, the
+result of which can be assigned to a property.
+
+Within the expression you have access to the `row` object
+(`RowInterface`_).
+
+Set the value of ``a.title`` to the node name:
+
+.. code-block:: bash
+
+    PHPCRSH> UPDATE [nt:unstructured] AS a SET a.title = expr('row.getNode().getName()')
+
+Set the value of ``a.title`` to the value of the property :
+
+.. code-block:: bash
+
+    PHPCRSH> UPDATE [nt:unstructured] AS a SET a.title = expr('row.getNode().getProperty('some_property')')
+
+Increment the value of a property:
+
+.. code-block:: bash
+
+    PHPCRSH> UPDATE [nt:unstructured] AS a SET a.count = expr('row.getNode().getPropertyValue("count") + 1')
+
+Set the value of ``a.title`` from the value of a joined node:
+
+.. code-block:: bash
+
+    PHPCRSH> UPDATE [nt:unstructured] AS a INNER JOIN [nt:something] AS b ON a.foo = b.bar SET a.title = expr('row.getNode("b").getPropertyValue("something")')
+
 mixin_add
 """""""""
 
@@ -201,3 +242,6 @@ without the column selection:
 
     PHPCRSH > DELETE FROM [slinpTest:article] WHERE title="Home"
     1 row(s) affected in 0.01s
+
+.. _Symfony Expression Language: http://symfony.com/doc/current/components/expression_language/index.html
+.. _RowInterface: http://phpcr.github.io/doc/html/files/phpcr.src.PHPCR.Query.RowInterface.html#\PHPCR\Query\RowInterface
