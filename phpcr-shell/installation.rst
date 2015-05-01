@@ -35,24 +35,17 @@ If you are using a Symfony2 application and a version of `DoctrinePHPCRBundle
 <https://github.com/doctrine/DoctrinePHPCRBundle/>`_ greater than 1.2 then you
 can easily integrate the PHPCR-Shell.
 
-Simply add the shell to your ``composer.json`` file
-
-.. code-block:: javascript
-
-    { 
-        ...
-        require: {
-            ...
-            "phpcr-shell": "<latest version here>"
-        }
-        ...
-    }
-
-And you can connect directly:
+Simply add the shell with composer:
 
 .. code-block:: bash
 
-    $ php app/console phpcr:shell
+    $ composer require phpcr/phpcr-shell
+
+And you can start the shell as a symfony command:
+
+.. code-block:: bash
+
+    $ php app/console doctrine:phpcr:shell
 
 Build it from source
 --------------------
