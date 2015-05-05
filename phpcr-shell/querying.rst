@@ -196,13 +196,13 @@ Set the value of ``a.title`` to the value of the property :
 
 .. code-block:: bash
 
-    PHPCRSH> UPDATE [nt:unstructured] AS a SET a.title = expr('row.getNode().getPropertyValue("some_property")')
+    PHPCRSH> UPDATE [nt:unstructured] AS a SET a.title = expr('row.getNode().getPropertyValueWithDefault("some_property", null)')
 
 Increment the value of a property:
 
 .. code-block:: bash
 
-    PHPCRSH> UPDATE [nt:unstructured] AS a SET a.count = expr('row.getNode().getPropertyValue("count") + 1')
+    PHPCRSH> UPDATE [nt:unstructured] AS a SET a.count = expr('row.getNode().getPropertyValueWithDefault("count", 0) + 1')
 
 Set the value of ``a.title`` from the value of a joined node:
 
