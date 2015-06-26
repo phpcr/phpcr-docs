@@ -10,7 +10,7 @@ Install as a PHAR
 -----------------
 
 The latest release can be downloaded from the `Github releases page
-<https://github.com/doctrine/DoctrinePHPCRBundle/>`_.
+<https://github.com/phpcr/phpcr-shell/releases/>`_.
 
 After downloading it is recommended to install it in a path accessible
 by the system, for example:
