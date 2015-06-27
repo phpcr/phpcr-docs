@@ -98,7 +98,7 @@ node properties and children which are defined in the schema with the ``-t`` opt
     | jcr:primaryType    | NAME                    | slinpTest:article                              |
     | title              | STRING                  | Slinp Web Content Framework                    |
     +--------------------+-------------------------+------------------------------------------------+
-    PHPCRSH> ls -T
+    PHPCRSH> ls -t
     /cms/foo [nt:unstructured] > nt:base
     +--------------------+-------------------------+------------------------------------------------+
     | home               | slinpTest:article       | Home                                           |
