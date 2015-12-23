@@ -39,7 +39,7 @@ Simply add the shell with composer:
 
 .. code-block:: bash
 
-    $ composer require phpcr/phpcr-shell
+    $ composer require phpcr/phpcr-shell@dev
 
 And you can start the shell as a symfony command:
 
