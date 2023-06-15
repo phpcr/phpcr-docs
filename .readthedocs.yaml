@@ -1,0 +1,12 @@
+version: 2
+
+sphinx:
+    configuration: conf.py
+
+# additional formats
+formats:
+    - pdf
+
+python:
+    version: "3.7"
+
