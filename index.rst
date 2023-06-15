@@ -14,10 +14,5 @@ Contents:
    book/index
    phpcr-shell/index
 
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
 * :ref:`search`
 
