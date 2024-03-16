@@ -1,12 +1,13 @@
 version: 2
 
+build:
+    os: ubuntu-lts-latest
+    tools:
+        python: "3.11"
+
 sphinx:
     configuration: conf.py
 
-# additional formats
-formats:
-    - pdf
-
 python:
-    version: "3.7"
-
+    install:
+        - requirements: requirements.txt
