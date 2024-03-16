@@ -18,7 +18,7 @@ An Example
 As an example we will define the node types required by a canonical blog
 application.
 
-.. code-block:: cnd
+.. code-block:: text
 
         <acmeBlog = "http://example.org/basiccms/ns/1.0">
 
@@ -59,7 +59,7 @@ The Canonical Example
 
 This has been copied directly from the `Jackrabbit Node Type Reference <http://jackrabbit.apache.org/node-type-notation.html>`_.
 
-.. code-block:: cnd
+.. code-block:: text
 
     /*  An example node type definition */
 
