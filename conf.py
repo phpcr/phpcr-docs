@@ -38,5 +38,5 @@ html_logo = "_static/logo_small.png"
 
 html_static_path = ['_static']
 html_css_files = [
-    'css/phpcr.css',
+    'phpcr.css',
 ]
